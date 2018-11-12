@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_height="match_parent" android:layout_width="match_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.v7.widget.Toolbar android:layout_height="?attr/actionBarSize" android:layout_width="match_parent" android:background="?attr/colorPrimary" app:navigationIcon="?attr/homeAsUpIndicator" android:minHeight="?attr/actionBarSize" app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" android:id="@+id/toolbar"/>
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="200dp"
+            android:src="@drawable/baseline_place_black_18dp" />
+
+        <EditText
+            android:id="@+id/uname"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView7"
+            android:layout_marginLeft="67dp"
+            android:ems="10"
+            android:hint="Username"
+            android:inputType="textPersonName"
+            android:textColor="@color/colorAccent"
+            android:textSize="15dp" />
+
+        <EditText
+            android:id="@+id/pass"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView8"
+            android:layout_marginLeft="67dp"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColor="@color/colorAccent"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="67dp"
+            android:layout_marginTop="256dp"
+            android:text="Username "
+            android:textColor="@color/colorAccent"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/uname"
+            android:layout_marginLeft="67dp"
+            android:layout_marginTop="12dp"
+            android:text="Password "
+            android:textColor="@color/colorAccent"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="92dp"
+            android:onClick="log"
+            android:text="login"
+            android:textColor="@color/colorAccent" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

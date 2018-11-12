@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".organise"
+    >
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Title :" />
+
+            <EditText
+                android:id="@+id/titlee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/title"
+                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:ems="10"
+                android:hint="title"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/sub"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/titlee"
+                android:text="SubTitle :" />
+
+            <EditText
+                android:id="@+id/sub2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/titlee"
+                android:layout_alignStart="@+id/titlee"
+                android:layout_below="@+id/sub"
+                android:ems="10"
+                android:hint="SubTitle"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/sub2"
+                android:text="Description :" />
+
+            <EditText
+                android:id="@+id/desc1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/titlee"
+                android:layout_alignStart="@+id/titlee"
+                android:layout_below="@+id/desc"
+                android:ems="10"
+                android:hint="description"
+                android:inputType="textMultiLine" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/desc1"
+                android:text="Time :" />
+
+            <EditText
+                android:id="@+id/time1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/titlee"
+                android:layout_alignStart="@+id/titlee"
+                android:layout_below="@+id/time"
+                android:ems="10"
+                android:inputType="time" />
+
+            <TextView
+                android:id="@+id/venue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/time1"
+                android:text="Venue :" />
+
+            <EditText
+                android:id="@+id/venue1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/titlee"
+                android:layout_alignStart="@+id/titlee"
+                android:layout_below="@+id/venue"
+                android:ems="10"
+                android:hint="venue"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/imrl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="114dp"
+                android:text="Image_url :" />
+
+            <EditText
+                android:id="@+id/imrl1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/titlee"
+                android:layout_alignStart="@+id/titlee"
+                android:layout_below="@+id/imrl"
+                android:layout_marginTop="-114dp"
+                android:ems="10"
+                android:hint="iurl"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/m1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/imrl1"
+                android:text="Manager 1:" />
+
+            <EditText
+                android:id="@+id/m1n"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/titlee"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/titlee"
+                android:ems="10"
+                android:hint="name"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/m1p"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="contact no"
+                android:inputType="phone" />
+
+            <TextView
+                android:id="@+id/m2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Manager 2:" />
+
+            <EditText
+                android:id="@+id/m2n"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="name"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/m2p"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="conatct no"
+                android:inputType="phone" />
+
+            <Button
+                android:id="@+id/org"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="organise"
+                android:onClick="orga"/>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
