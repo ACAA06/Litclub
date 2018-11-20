@@ -5,24 +5,29 @@ package clemadr06.litclub;
  */
 
 public class club {
-    private String line1;
-    private String line2;
-    private String line3;
+    private String title;
+    private String subtitle;
+    private String author;
+    private int id;
 
-    public club(String line1, String line2, String line3) {
-        this.line1 = line1;
-        this.line2 = line2;
-        this.line3=line3;
+    public club(String title, String subtitle, String author,int id) {
+        this.title = title;
+        this.subtitle = subtitle;
+        this.author=author;
+        this.id=id;
     }
 
-    public String getLine1() {
-        return line1;
+    public String getTitle() {
+        return title;
     }
 
-    public String getLine2() {
-        return line2;
+    public String getSubtitle() {
+        return subtitle;
     }
-    public String getLine3() {
-        return line3;
+    public String getAuthor() {
+        return author;
+    }
+    public int getId() {
+        return id;
     }
 }

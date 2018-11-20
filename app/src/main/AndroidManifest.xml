@@ -3,6 +3,7 @@
     package="clemadr06.LitClub">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -26,16 +27,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="clemadr06.litclub.login"
+        <activity
+            android:name="clemadr06.litclub.login"
             android:label="Login"
-            android:theme="@style/AppTheme"/>
-        <activity android:name="clemadr06.litclub.organise"
-            android:label="Organise"
-            android:theme="@style/AppTheme"/>
-        <activity android:name="clemadr06.litclub.description"
-            android:label="@string/app_name"
             android:theme="@style/AppTheme"
-            android:parentActivityName="clemadr06.litclub.MainActivity"></activity>
+            android:parentActivityName="clemadr06.litclub.MainActivity"/>
+        <activity
+            android:name="clemadr06.litclub.organise"
+            android:label="Organise"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="clemadr06.litclub.description"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="clemadr06.litclub.imgonclick"
+            android:theme="@style/myDialogTheme" />
+        <activity android:name="clemadr06.litclub.adminpanel"
+            android:launchMode="singleTask"
+            android:parentActivityName="clemadr06.litclub.login"/>
+        <activity android:name="clemadr06.litclub.description1"
+            android:parentActivityName="clemadr06.litclub.adminpanel"/>
+        <activity android:name="clemadr06.litclub.editpost"
+            android:parentActivityName="clemadr06.litclub.description1"
+            android:launchMode="singleTask"></activity>
     </application>
 
 </manifest>

@@ -1,24 +1,15 @@
 package clemadr06.litclub;
 
 import android.app.ActionBar;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.Window;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -27,50 +18,45 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import clemadr06.LitClub.*;
+import clemadr06.LitClub.R;
 import cz.msebera.android.httpclient.Header;
 
-public class description extends AppCompatActivity {
-    TextView desc;
+public class description1 extends AppCompatActivity {
+    TextView desc1;
     TextView date1,date2,date3;
-    TextView venue;
-    TextView title;
-    TextView subtitle;
-    TextView m1n;
-    TextView m1ph;
-    TextView m2n;
-    TextView m2ph;
-    ImageView img;
+    TextView venue1;
+    TextView title1;
+    TextView subtitle1;
+    TextView m1n1;
+    TextView m1ph1;
+    TextView m2n1;
+    TextView m2ph1;
+    ImageView img11;
     ImageView img1;
     String d1,d2,d3;
-int s;
-String url;
+    int s;
+    int id;
+    String url;
     boolean isImageFitToScreen;
-    String dates;
 
     CollapsingToolbarLayout collapsingToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.x);
-        desc=(TextView)findViewById(R.id.desco);
-        venue=(TextView)findViewById(R.id.venueo);
-        date1=(TextView)findViewById(R.id.timo1);
-        date2=(TextView)findViewById(R.id.timo2);
-        date3=(TextView)findViewById(R.id.timo3);
-        title=(TextView)findViewById(R.id.titleo);
-        subtitle=(TextView)findViewById(R.id.subtitleo);
-        m1n=(TextView)findViewById(R.id.m1no);
-        m2n=(TextView)findViewById(R.id.m2no);
-        m1ph=(TextView)findViewById(R.id.m1po);
-        m2ph=(TextView)findViewById(R.id.m2po);
-        img=(ImageView) findViewById(R.id.header);
+        setContentView(R.layout.activity_description1);
+        desc1=(TextView)findViewById(R.id.desco1);
+        venue1=(TextView)findViewById(R.id.venueo1);
+        date1=(TextView)findViewById(R.id.timo11);
+        date2=(TextView)findViewById(R.id.timo21);
+        date3=(TextView)findViewById(R.id.timo31);
+        title1=(TextView)findViewById(R.id.titleo1);
+        subtitle1=(TextView)findViewById(R.id.subtitleo1);
+        m1n1=(TextView)findViewById(R.id.m1no1);
+        m2n1=(TextView)findViewById(R.id.m2no1);
+        m1ph1=(TextView)findViewById(R.id.m1po1);
+        m2ph1=(TextView)findViewById(R.id.m2po1);
+        img1=(ImageView) findViewById(R.id.header1);
         ActionBar actionBar = getActionBar();
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
 //        toolbar.setTitle("LitClubs");
@@ -82,13 +68,13 @@ String url;
         });
 */
         //actionBar.setDisplayHomeAsUpEnabled(true);
-        toolbar = (Toolbar) findViewById(R.id.anim_toolbar);
+        toolbar = (Toolbar) findViewById(R.id.anim_toolbar1);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null)
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar1);
         collapsingToolbar.setTitle("LitClub");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,8 +82,7 @@ String url;
                 finish();
             }
         });
-        s= getIntent().getExtras().getInt("id");
-        Toast.makeText(description.this," "+s,Toast.LENGTH_SHORT).show();
+        s= getIntent().getIntExtra("id",0);
         AsyncHttpClient client=new AsyncHttpClient();
         client.get("https://dev.rajkumaar.co.in/clement/zara/api/posts.php",new JsonHttpResponseHandler(){
             @Override
@@ -107,10 +92,10 @@ String url;
                     for(int j=0;j<jsonArray.length();j++) {
                         JSONObject obj = jsonArray.getJSONObject(j);
                         if(obj.getInt("id")==s) {
-                            desc.setText(obj.getString("description"));
+                            desc1.setText(obj.getString("description"));
                             // time.setText(obj.getString("timing"));
-                            venue.setText(obj.getString("venue"));
-                            title.setText(obj.getString("title"));
+                            venue1.setText(obj.getString("venue"));
+                            title1.setText(obj.getString("title"));
                             d1 = obj.getString("date1");
                             d2 = obj.getString("date2");
                             d3 = obj.getString("date3");
@@ -119,7 +104,7 @@ String url;
                                 date2.setVisibility(View.GONE);
                                 date3.setVisibility(View.GONE);
                             } else {
-                                if (d1.equals("null")) {
+                                if (d1.equals(null)) {
                                     date1.setText(d2);
                                     date2.setText(d3);
                                     date3.setVisibility(View.GONE);
@@ -130,14 +115,14 @@ String url;
 
                                 }
                             }
-                            subtitle.setText(obj.getString("subtitle"));
-                            m1n.setText(obj.getString("manager1_name"));
-                            m2n.setText(obj.getString("manager2_name"));
-                            m1ph.setText(obj.getString("manager1_contact"));
-                            m2ph.setText(obj.getString("manager2_contact"));
+                            subtitle1.setText(obj.getString("subtitle"));
+                            m1n1.setText(obj.getString("manager1_name"));
+                            m2n1.setText(obj.getString("manager2_name"));
+                            m1ph1.setText(obj.getString("manager1_contact"));
+                            m2ph1.setText(obj.getString("manager2_contact"));
                             url = obj.getString("img_url");
-                          //  id = obj.getInt("id");
-                            Picasso.with(description.this)
+                            id = obj.getInt("id");
+                            Picasso.with(description1.this)
                                     .load(url)
                                     // .placeholder(R.drawable.ic_placeholder)
                                     //.error(R.drawable.ic_error_fallback)
@@ -147,17 +132,17 @@ String url;
                     }
 
 
-                    }
-                    catch(Exception e)
-                    {
-                        e.printStackTrace();
-                    }
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
 
                 super.onSuccess(statusCode, headers, response);
-        }
-    });
+            }
+        });
 
-        img.setOnClickListener(new View.OnClickListener() {
+        img1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                /* Dialog dialog = new Dialog(description.this);
@@ -186,31 +171,21 @@ String url;
                         image.setLayoutParams(layoutParams);
 
 */
-                Dialog dialog = new Dialog(description.this);
+                Dialog dialog = new Dialog(description1.this);
                 dialog.setContentView(R.layout.imgdialog);
-                 img1=(ImageView) dialog.findViewById(R.id.imaged);
-                Picasso.with(description.this)
+                img1=(ImageView) dialog.findViewById(R.id.imaged);
+                Picasso.with(description1.this)
                         .load(url)
-                        .into(img1);
+                        .into(img11);
 
                 dialog.show();
-                    }
-                });
             }
-
+        });
+    }
+    public void edit(View v)
+    {
+        Intent i = new Intent(getApplicationContext(), editpost.class);
+        i.putExtra("id",id);
+        startActivity(i);
+    }
 }
-    /*public static Bitmap getBitmapFromURL(String src) {
-        try {
-            URL url = new URL(src);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
-        } catch (IOException e) {
-            // Log exception
-            return null;
-        }
-    }*/
-

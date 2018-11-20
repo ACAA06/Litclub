@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -51,13 +52,16 @@ public class login extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
                     if(response.getString("status").equals("true")) {
-                        gdata g = new gdata(response.getString("token"));
-                        Intent i = new Intent(getApplicationContext(), organise.class);
-                        i.putExtra("token1", response.getString("token"));
+                        gdata g = new gdata();
+                        g.setToken(response.getString("token"));
+                        g.setId(response.getInt("id"));
+                        Log.e("token",response.getString("token"));
+                        Intent i = new Intent(getApplicationContext(), adminpanel.class);
+                        //i.putExtra("token1", response.getString("token"));
                         startActivity(i);
                     }
                     else{
-                        Toast.makeText(login.this,"Invalid Username or password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(login.this,response.getString("error"), Toast.LENGTH_SHORT).show();
 
                     }
                 }
@@ -70,6 +74,7 @@ public class login extends AppCompatActivity {
             public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
                 // called when response HTTP status is "4XX" (eg. 401, 403, 404)
                 //Toast.makeText(login.this,"Invalid Username or password", Toast.LENGTH_SHORT).show();
+                Toast.makeText(login.this,"failure", Toast.LENGTH_SHORT).show();
             }
         });
     }

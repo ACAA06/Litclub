@@ -1,10 +1,15 @@
 package clemadr06.litclub;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +18,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -21,6 +28,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import clemadr06.LitClub.R;
 import cz.msebera.android.httpclient.Header;
@@ -30,6 +39,13 @@ public class MainActivity extends AppCompatActivity
     private static final String TAG = "CardListActivity";
     private ClubAdapter cardArrayAdapter;
     private ListView listView;
+    int j;
+    int id[];
+    club card;
+    clubsadapter clubsadapter;
+    ArrayList<club> clubList ;
+    ArrayList<club> clubList1 = new ArrayList<club>();
+    ProgressBar p;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +63,40 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        gettitle();
+        listView = findViewById(R.id.card_listView);
+        p=(ProgressBar)findViewById(R.id.progressBar1);
+       if(check())
+       {
+
+           gettitle();
+       }
+        final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipelayout);
+        swipeRefreshLayout.setColorSchemeResources(R.color.refresh,R.color.refresh1,R.color.refresh2);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                (new Handler()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        swipeRefreshLayout.setRefreshing(false);
+                       /* clubsadapter = new clubsadapter(MainActivity.this,clubList1);
+                        listView.setAdapter(clubsadapter);
+                         gettitle();*/
+                        if(check()) {
+
+                               // clubsadapter = new clubsadapter(MainActivity.this,clubList1);
+                                gettitle();
+
+                        }
+                        else{
+                            p.setVisibility(View.GONE);
+                        }
+                    }
+                },3000);
+            }
+        });
 
 
 /*            club card = new club("Card "+ " Line 1", " Line 2", " Line 2");
@@ -55,29 +104,49 @@ public class MainActivity extends AppCompatActivity
         }
         listView.setAdapter(cardArrayAdapter);*/
     }
-
+    public boolean check()
+    {
+        if(isNetworkAvailable()){
+            return true;
+        }
+        else{
+Toast.makeText(MainActivity.this,"Connect to Internet",Toast.LENGTH_SHORT).show();
+          //  p.setVisibility(View.GONE);
+return false;
+        }
+    }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 public void gettitle()
 {
-    listView = (ListView) findViewById(R.id.card_listView);
+   // listView = (ListView) findViewById(R.id.card_listView);
 
-    listView.addHeaderView(new View(this));
-    listView.addFooterView(new View(this));
+  //  listView.addHeaderView(new View(this));
+   // listView.addFooterView(new View(this));
 
-    cardArrayAdapter = new ClubAdapter(getApplicationContext(), R.layout.list);
+   // cardArrayAdapter = new ClubAdapter(getApplicationContext(), R.layout.list);
+    clubList = new ArrayList<club>();
     AsyncHttpClient client=new AsyncHttpClient();
     client.get("https://dev.rajkumaar.co.in/clement/zara/api/posts.php",new JsonHttpResponseHandler(){
         @Override
         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
             try {
                 JSONArray jsonArray=response.getJSONArray("data");
+                id=new int[jsonArray.length()];
        for(int i=0;i<jsonArray.length();i++)
 {
     JSONObject obj=jsonArray.getJSONObject(i);
-
-    club card = new club(obj.getString("title"), obj.getString("subtitle"), obj.getString("author"));
-    cardArrayAdapter.add(card);
-}
-                listView.setAdapter(cardArrayAdapter);
+   // id[i]=obj.getInt("id");
+    card = new club(obj.getString("title"), obj.getString("subtitle"), obj.getString("author"),obj.getInt("id"));
+   // cardArrayAdapter.add(card);
+   clubList.add(card);
+} clubsadapter = new clubsadapter(MainActivity.this,clubList);
+                listView.setAdapter(clubsadapter);
+                p.setVisibility(View.GONE);
 
             }
             catch(Exception e)
@@ -86,19 +155,28 @@ public void gettitle()
             }
             super.onSuccess(statusCode, headers, response);
         }
+
+        @Override
+        public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+            Toast.makeText(MainActivity.this,"failure",Toast.LENGTH_SHORT).show();
+            super.onFailure(statusCode, headers, responseString, throwable);
+        }
     });
 
-    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+   /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id1) {
            // Object o = listView.getItemAtPosition(position);
             //listView str = (listView) o; //As you are using Default String Adapter
             //Toast.makeText(getBaseContext(),str.getTitle(),Toast.LENGTH_SHORT).show();
             Intent i = new Intent(getApplicationContext(), description.class);
-            i.putExtra("position",position);
+            club card1;
+            card=clubList.get(position-1);
+            j=card.getId();
+            i.putExtra("position",j);
             startActivity(i);
         }
-    });
+    });*/
 }
 
     @Override

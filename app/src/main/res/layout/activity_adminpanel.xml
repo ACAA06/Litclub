@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/swipelayout1"
+    tools:context="clemadr06.litclub.adminpanel"
+    tools:layout_editor_absoluteY="25dp">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="clemadr06.litclub.adminpanel"
+        tools:layout_editor_absoluteY="25dp">
+
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:indeterminate="true"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="245dp" />
+
+
+        <ListView
+        android:id="@+id/card_listView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@null"
+        android:dividerHeight="10dp"
+        android:listSelector="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.design.widget.FloatingActionButton
+
+            android:id="@+id/floatingActionButton"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentBottom="true"
+
+            android:layout_alignParentEnd="true"
+
+            android:layout_marginBottom="29dp"
+            android:layout_marginEnd="18dp"
+
+            android:clickable="true"
+            android:onClick="addpost"
+            android:src="@drawable/ic_menu_manage"
+            app:backgroundTint="#279AF1"
+            app:fabSize="normal"
+            app:layout_anchor="@+id/card_listView1"
+            app:layout_anchorGravity="bottom|right|end"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+</RelativeLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

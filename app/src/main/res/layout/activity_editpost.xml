@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="clemadr06.litclub.organise"
+    tools:context="clemadr06.litclub.editpost"
     >
 
 
@@ -18,13 +18,13 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/titleedit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Title :" />
 
             <EditText
-                android:id="@+id/titlee"
+                android:id="@+id/titleeedit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -37,41 +37,41 @@
                 android:inputType="textPersonName" />
 
             <TextView
-                android:id="@+id/sub"
+                android:id="@+id/subedit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/titlee"
+                android:layout_below="@+id/titleeedit"
                 android:text="SubTitle :" />
 
             <EditText
-                android:id="@+id/sub2"
+                android:id="@+id/sub2edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/titlee"
-                android:layout_alignStart="@+id/titlee"
-                android:layout_below="@+id/sub"
+                android:layout_alignLeft="@+id/titleeedit"
+                android:layout_alignStart="@+id/titleeedit"
+                android:layout_below="@+id/subedit"
                 android:ems="10"
                 android:hint="SubTitle"
                 android:inputType="textPersonName" />
 
             <TextView
-                android:id="@+id/desc"
+                android:id="@+id/descedit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/sub2"
+                android:layout_below="@+id/sub2edit"
                 android:text="Description :" />
 
             <EditText
-                android:id="@+id/desc1"
+                android:id="@+id/desc1edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/titlee"
-                android:layout_alignStart="@+id/titlee"
-                android:layout_below="@+id/desc"
+                android:layout_alignLeft="@+id/titleeedit"
+                android:layout_alignStart="@+id/titleeedit"
+                android:layout_below="@+id/descedit"
                 android:ems="10"
                 android:hint="description"
                 android:inputType="textMultiLine" />
@@ -104,153 +104,153 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:id="@+id/parent">
-            <TextView
-                android:id="@+id/date1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/desc1"
-                android:text="Date1 :" />
+                android:id="@+id/parentedit">
+                <TextView
+                    android:id="@+id/date1edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/desc1edit"
+                    android:text="Date1 :" />
 
-                   <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_alignLeft="@+id/titlee"
-    android:layout_alignStart="@+id/titlee"
-    android:layout_below="@+id/date1">
-    <TextView
-        android:id="@+id/edate1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-
-        android:ems="10"
-        android:inputType="time" />
-    <TextView
-        android:id="@+id/etime1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="time" />
-</LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignLeft="@+id/titleeedit"
+                    android:layout_alignStart="@+id/titleeedit"
+                    android:layout_below="@+id/date1edit">
+                    <TextView
+                        android:id="@+id/edate1edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
 
 
-            <Button
-                android:id="@+id/setd1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Button" />
-            <Button
-                android:id="@+id/sett1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Button" />
+                        android:ems="10"
+                        android:inputType="time" />
+                    <TextView
+                        android:id="@+id/etime1edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="time" />
+                </LinearLayout>
+
+
+                <Button
+                    android:id="@+id/setd1edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Button" />
+                <Button
+                    android:id="@+id/sett1edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Button" />
             </LinearLayout>
 
             <TextView
-                android:id="@+id/date2"
+                android:id="@+id/date2edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/desc1"
+                android:layout_below="@+id/desc1edit"
                 android:text="Date2 :" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_alignLeft="@+id/titlee"
-            android:layout_alignStart="@+id/titlee"
-            android:layout_below="@+id/date2">
-            <TextView
-                android:id="@+id/edate2"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="time" />
-            <TextView
-                android:id="@+id/etime2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="time" />
+                android:orientation="horizontal"
+                android:layout_alignLeft="@+id/titleeedit"
+                android:layout_alignStart="@+id/titleeedit"
+                android:layout_below="@+id/date2edit">
+                <TextView
+                    android:id="@+id/edate2edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="time" />
+                <TextView
+                    android:id="@+id/etime2edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="time" />
 
-        </LinearLayout>
+            </LinearLayout>
             <Button
-                android:id="@+id/setd2"
+                android:id="@+id/setd2edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Button" />
             <Button
-                android:id="@+id/sett2"
+                android:id="@+id/sett2edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Button" />
             <TextView
-                android:id="@+id/date3"
+                android:id="@+id/date3edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/desc1"
+                android:layout_below="@+id/desc1edit"
                 android:text="Date3 :" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_alignLeft="@+id/titlee"
-            android:layout_alignStart="@+id/titlee"
-            android:layout_below="@+id/date3">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignLeft="@+id/titleeedit"
+                android:layout_alignStart="@+id/titleeedit"
+                android:layout_below="@+id/date3edit">
 
-            <TextView
-                android:id="@+id/edate3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="time" />
-            <TextView
-                android:id="@+id/etime3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="time" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/edate3edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="time" />
+                <TextView
+                    android:id="@+id/etime3edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="time" />
+            </LinearLayout>
             <Button
-                android:id="@+id/setd3"
+                android:id="@+id/setd3edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Button" />
             <Button
-                android:id="@+id/sett3"
+                android:id="@+id/sett3edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Button" />
 
             <TextView
-                android:id="@+id/venue"
+                android:id="@+id/venueedit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/time1"
+                android:layout_below="@+id/time1edit"
                 android:text="Venue :" />
 
             <EditText
-                android:id="@+id/venue1"
+                android:id="@+id/venue1edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/titlee"
-                android:layout_alignStart="@+id/titlee"
-                android:layout_below="@+id/venue"
+                android:layout_alignLeft="@+id/titleeedit"
+                android:layout_alignStart="@+id/titleeedit"
+                android:layout_below="@+id/venueedit"
                 android:ems="10"
                 android:hint="venue"
                 android:inputType="textPersonName" />
 
             <TextView
-                android:id="@+id/imrl"
+                android:id="@+id/imrledit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -260,39 +260,39 @@
                 android:text="Image_url :" />
 
             <EditText
-                android:id="@+id/imrl1"
+                android:id="@+id/imrl1edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/titlee"
-                android:layout_alignStart="@+id/titlee"
-                android:layout_below="@+id/imrl"
+                android:layout_alignLeft="@+id/titleeedit"
+                android:layout_alignStart="@+id/titleeedit"
+                android:layout_below="@+id/imrledit"
                 android:layout_marginTop="-114dp"
                 android:ems="10"
                 android:hint="iurl"
                 android:inputType="textPersonName" />
 
             <TextView
-                android:id="@+id/m1"
+                android:id="@+id/m1edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/imrl1"
+                android:layout_below="@+id/imrl1edit"
                 android:text="Manager 1:" />
 
             <EditText
-                android:id="@+id/m1n"
+                android:id="@+id/m1nedit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/titlee"
+                android:layout_alignLeft="@+id/titleeedit"
                 android:layout_alignParentBottom="true"
-                android:layout_alignStart="@+id/titlee"
+                android:layout_alignStart="@+id/titleeedit"
                 android:ems="10"
                 android:hint="name"
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/m1p"
+                android:id="@+id/m1pedit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -300,13 +300,13 @@
                 android:inputType="phone" />
 
             <TextView
-                android:id="@+id/m2"
+                android:id="@+id/m2edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Manager 2:" />
 
             <EditText
-                android:id="@+id/m2n"
+                android:id="@+id/m2nedit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -314,7 +314,7 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/m2p"
+                android:id="@+id/m2pedit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -322,7 +322,7 @@
                 android:inputType="phone" />
 
             <Button
-                android:id="@+id/org"
+                android:id="@+id/orgedit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="organise"

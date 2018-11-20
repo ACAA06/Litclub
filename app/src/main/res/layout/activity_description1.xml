@@ -17,7 +17,7 @@
 
     <android.support.design.widget.AppBarLayout
 
-        android:id="@+id/appbar"
+        android:id="@+id/appbar1"
 
         android:layout_width="match_parent"
 
@@ -31,7 +31,7 @@
 
         <android.support.design.widget.CollapsingToolbarLayout
 
-            android:id="@+id/collapsing_toolbar"
+            android:id="@+id/collapsing_toolbar1"
 
             android:layout_width="match_parent"
 
@@ -49,7 +49,7 @@
 
             <ImageView
 
-                android:id="@+id/header"
+                android:id="@+id/header1"
 
                 android:layout_width="match_parent"
 
@@ -91,7 +91,7 @@
 
             <android.support.v7.widget.Toolbar
 
-                android:id="@+id/anim_toolbar"
+                android:id="@+id/anim_toolbar1"
 
                 android:layout_width="match_parent"
 
@@ -120,14 +120,14 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/titleo"
+                android:id="@+id/titleo1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textSize="@dimen/title" />
 
             <TextView
-                android:id="@+id/subtitleo"
+                android:id="@+id/subtitleo1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -147,33 +147,30 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:src="@drawable/baseline_timer_black_18dp" />
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/timo1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:textSize="@dimen/normal" />
-        <TextView
-            android:id="@+id/timo2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:textSize="@dimen/normal" />
-        <TextView
-            android:id="@+id/timo3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:textSize="@dimen/normal" />
-    </LinearLayout>
-</LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/timo11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:textSize="@dimen/normal" />
+                    <TextView
+                        android:id="@+id/timo21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:textSize="@dimen/normal" />
+                    <TextView
+                        android:id="@+id/timo31"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:textSize="@dimen/normal" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -189,7 +186,7 @@
                     android:src="@drawable/baseline_place_black_18dp" />
 
                 <TextView
-                    android:id="@+id/venueo"
+                    android:id="@+id/venueo1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="50dp"
@@ -209,20 +206,20 @@
                     android:src="@drawable/baseline_phone_black_18dp" />
 
                 <TextView
-                    android:id="@+id/m1no"
+                    android:id="@+id/m1no1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="50dp"
-                    android:text="m1n"
+
                     android:textSize="@dimen/normal" />
 
                 <TextView
-                    android:id="@+id/m1po"
+                    android:id="@+id/m1po1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/m1no"
+                    android:layout_below="@+id/m1no1"
                     android:layout_marginLeft="50dp"
-                    android:text="m1p"
+
                     android:textSize="@dimen/normal" />
             </LinearLayout>
 
@@ -232,21 +229,20 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/m2no"
+                    android:id="@+id/m2no1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/m1no"
+                    android:layout_below="@+id/m1no1"
                     android:layout_marginLeft="95dp"
-                    android:text="m2n"
+
                     android:textSize="@dimen/normal" />
 
                 <TextView
-                    android:id="@+id/m2po"
+                    android:id="@+id/m2po1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/m2no"
+                    android:layout_below="@+id/m2no1"
                     android:layout_marginLeft="50dp"
-                    android:text="m2p"
                     android:textSize="@dimen/normal" />
             </LinearLayout>
 
@@ -263,7 +259,7 @@
                     android:src="@drawable/baseline_assignment_black_18dp" />
 
                 <TextView
-                    android:id="@+id/desco"
+                    android:id="@+id/desco1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="50dp"
@@ -292,7 +288,8 @@
 
         app:fabSize="normal"
 
-        app:layout_anchor="@+id/appbar"
+        app:layout_anchor="@+id/appbar1"
+        android:onClick="edit"
 
         app:layout_anchorGravity="bottom|right|end"/>
 
