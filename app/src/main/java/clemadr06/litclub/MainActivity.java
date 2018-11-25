@@ -2,10 +2,12 @@ package clemadr06.litclub;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,6 +15,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +26,7 @@ import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -43,6 +47,7 @@ public class MainActivity extends AppCompatActivity
     int id[];
     club card;
     clubsadapter clubsadapter;
+    String token1;
     ArrayList<club> clubList ;
     ArrayList<club> clubList1 = new ArrayList<club>();
     ProgressBar p;
@@ -51,6 +56,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main
         );
+        sendToken();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         final ArrayList<club> words = new ArrayList<club>();
@@ -103,6 +109,32 @@ public class MainActivity extends AppCompatActivity
             cardArrayAdapter.add(card);
         }
         listView.setAdapter(cardArrayAdapter);*/
+    }
+    public void sendToken()
+    {
+         String android_id = Settings.Secure.getString(getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+
+        SharedPreferences preferences=getSharedPreferences("firebase",Context.MODE_PRIVATE) ;
+       if( preferences.getBoolean("refresh",true))
+       {   preferences.getString("token",token1);
+           AsyncHttpClient client=new AsyncHttpClient();
+           RequestParams params = new RequestParams();
+           params.put("token",token1);
+           params.put("android_id", android_id);
+           client.post("https://dev.rajkumaar.co.in/clement/zara/api/settoken.php",params, new JsonHttpResponseHandler() {
+               @Override
+               public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                   Log.e("response:",response.toString());
+               }
+
+               @Override
+               public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
+                   // called when response HTTP status is "4XX" (eg. 401, 403, 404)
+
+               }
+           });
+       }
     }
     public boolean check()
     {

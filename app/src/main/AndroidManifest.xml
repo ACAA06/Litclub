@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,6 +18,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <service android:name="clemadr06.litclub.myfirebase">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
         <activity
             android:name="clemadr06.litclub.MainActivity"
             android:label="@string/app_name"
@@ -35,6 +41,7 @@
         <activity
             android:name="clemadr06.litclub.organise"
             android:label="Organise"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme" />
         <activity
             android:name="clemadr06.litclub.description"
@@ -45,12 +52,13 @@
             android:theme="@style/myDialogTheme" />
         <activity android:name="clemadr06.litclub.adminpanel"
             android:launchMode="singleTask"
-            android:parentActivityName="clemadr06.litclub.login"/>
+            android:parentActivityName="clemadr06.litclub.MainActivity"/>
         <activity android:name="clemadr06.litclub.description1"
             android:parentActivityName="clemadr06.litclub.adminpanel"/>
         <activity android:name="clemadr06.litclub.editpost"
             android:parentActivityName="clemadr06.litclub.description1"
             android:launchMode="singleTask"></activity>
+
     </application>
 
 </manifest>

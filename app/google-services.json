@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "337742303009",
+    "firebase_url": "https://litclub-7dfd7.firebaseio.com",
+    "project_id": "litclub-7dfd7",
+    "storage_bucket": "litclub-7dfd7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:337742303009:android:77c0c3d9aa2dcf76",
+        "android_client_info": {
+          "package_name": "clemadr06.LitClub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "337742303009-879c3bi9h3j71qneq1vs1hjvoshgeear.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "clemadr06.LitClub",
+            "certificate_hash": "f0496a7476b42bed627f06265c3739dcbecc93ce"
+          }
+        },
+        {
+          "client_id": "337742303009-mfkdf4q8o4p7ov3u69in76bs6d5q5hju.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_WWxdjTddUVn8AbN38O1xsEajwievHUU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "337742303009-mfkdf4q8o4p7ov3u69in76bs6d5q5hju.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

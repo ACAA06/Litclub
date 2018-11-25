@@ -10,6 +10,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -42,6 +43,9 @@ public class adminpanel extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adminpanel);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("Admin Pannel");
         p1=(ProgressBar)findViewById(R.id.progressBar2);
         if(check())
         {
@@ -102,27 +106,35 @@ public class adminpanel extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
-                    JSONArray jsonArray=response.getJSONArray("data");
-                    id=new int[jsonArray.length()];
-                    for(int i=0;i<jsonArray.length();i++)
-                    {
-                        JSONObject obj=jsonArray.getJSONObject(i);
-                        // id[i]=obj.getInt("id");
-                        card = new club(obj.getString("title"), obj.getString("subtitle"), obj.getString("author"),obj.getInt("id"));
-                        // cardArrayAdapter.add(card);
-                        clubList.add(card);
-                    } clubsadapter = new ClubAdapter(adminpanel.this,clubList);
-                    p1.setVisibility(View.GONE);
-                    listView.setAdapter(clubsadapter);
+                    if (response.getString("data").equals("Empty")) {
+                        p1.setVisibility(View.GONE);
+                        Toast.makeText(adminpanel.this,"no posts added",Toast.LENGTH_SHORT).show();;
+
+                    } else {
+
+                        JSONArray jsonArray = response.getJSONArray("data");
+                        id = new int[jsonArray.length()];
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject obj = jsonArray.getJSONObject(i);
+                            // id[i]=obj.getInt("id");
+                            card = new club(obj.getString("title"), obj.getString("subtitle"), obj.getString("author"), obj.getInt("id"));
+                            // cardArrayAdapter.add(card);
+                            clubList.add(card);
+                        }
+                        clubsadapter = new ClubAdapter(adminpanel.this, clubList);
+                        p1.setVisibility(View.GONE);
+                        listView.setAdapter(clubsadapter);
 
 
+                    }
                 }
                 catch(Exception e)
-                {
-                    e.printStackTrace();
+                    {
+                        e.printStackTrace();
+                    }
+                    super.onSuccess(statusCode, headers, response);
                 }
-                super.onSuccess(statusCode, headers, response);
-            }
+
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
