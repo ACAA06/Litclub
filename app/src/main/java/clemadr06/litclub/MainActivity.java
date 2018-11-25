@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity
     club card;
     clubsadapter clubsadapter;
     String token1;
+    String android_id;
     ArrayList<club> clubList ;
     ArrayList<club> clubList1 = new ArrayList<club>();
     ProgressBar p;
@@ -112,12 +113,12 @@ public class MainActivity extends AppCompatActivity
     }
     public void sendToken()
     {
-         String android_id = Settings.Secure.getString(getContentResolver(),
+          android_id = Settings.Secure.getString(getContentResolver(),
                 Settings.Secure.ANDROID_ID);
 
-        SharedPreferences preferences=getSharedPreferences("firebase",Context.MODE_PRIVATE) ;
+        final SharedPreferences preferences=getSharedPreferences("firebase",Context.MODE_PRIVATE) ;
        if( preferences.getBoolean("refresh",true))
-       {   preferences.getString("token",token1);
+       {   token1=preferences.getString("token",null);
            AsyncHttpClient client=new AsyncHttpClient();
            RequestParams params = new RequestParams();
            params.put("token",token1);
@@ -126,6 +127,17 @@ public class MainActivity extends AppCompatActivity
                @Override
                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                    Log.e("response:",response.toString());
+                   try {
+                       if(response.getString("success").equals("false"))
+                       {
+                           SharedPreferences.Editor ed = preferences.edit();
+                           ed.putBoolean("refresh",false);
+                       }
+                   }
+                   catch(Exception e){
+                       e.printStackTrace();
+                   }
+
                }
 
                @Override

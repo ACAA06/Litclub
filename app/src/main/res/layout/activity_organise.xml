@@ -16,8 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
             android:orientation="vertical">
 
             <TextView
@@ -33,9 +33,9 @@
                 android:id="@+id/titlee"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/title"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="24dp"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/title"
                 android:layout_marginBottom="4sp"
                 android:ems="10"
                 android:hint="Title"
@@ -45,9 +45,9 @@
                 android:id="@+id/sub"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/titlee"
-                android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/titlee"
                 android:text="SubTitle :"
                 android:textAllCaps="false"
                 android:textSize="24sp"
@@ -57,9 +57,9 @@
                 android:id="@+id/sub2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/sub"
-                android:layout_alignStart="@+id/titlee"
                 android:layout_alignLeft="@+id/titlee"
+                android:layout_alignStart="@+id/titlee"
+                android:layout_below="@+id/sub"
                 android:layout_marginBottom="4sp"
                 android:ems="10"
                 android:hint="SubTitle"
@@ -69,9 +69,9 @@
                 android:id="@+id/desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/sub2"
-                android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/sub2"
                 android:text="Description :"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -80,12 +80,12 @@
                 android:id="@+id/desc1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/desc"
-                android:layout_alignStart="@+id/titlee"
                 android:layout_alignLeft="@+id/titlee"
+                android:layout_alignStart="@+id/titlee"
+                android:layout_below="@+id/desc"
+                android:layout_marginBottom="4sp"
                 android:ems="10"
                 android:hint="Description"
-                android:layout_marginBottom="4sp"
                 android:inputType="textMultiLine" />
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -128,9 +128,9 @@
                     android:id="@+id/date1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/desc1"
-                    android:layout_alignParentStart="true"
                     android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/desc1"
                     android:text="Date1 :"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -138,9 +138,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/date1"
-                    android:layout_alignStart="@+id/titlee"
                     android:layout_alignLeft="@+id/titlee"
+                    android:layout_alignStart="@+id/titlee"
+                    android:layout_below="@+id/date1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -178,9 +178,9 @@
                 android:id="@+id/date2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/desc1"
-                android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/desc1"
                 android:text="Date2 :"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -188,9 +188,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/date2"
-                android:layout_alignStart="@+id/titlee"
                 android:layout_alignLeft="@+id/titlee"
+                android:layout_alignStart="@+id/titlee"
+                android:layout_below="@+id/date2"
                 android:orientation="horizontal">
 
                 <TextView
@@ -225,9 +225,9 @@
                 android:id="@+id/date3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/desc1"
-                android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/desc1"
                 android:text="Date3 :"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -235,9 +235,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/date3"
-                android:layout_alignStart="@+id/titlee"
                 android:layout_alignLeft="@+id/titlee"
+                android:layout_alignStart="@+id/titlee"
+                android:layout_below="@+id/date3"
                 android:orientation="horizontal">
 
                 <TextView
@@ -271,9 +271,9 @@
                 android:id="@+id/venue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/time1"
-                android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/time1"
                 android:text="Venue :"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -282,21 +282,21 @@
                 android:id="@+id/venue1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/venue"
-                android:layout_alignStart="@+id/titlee"
                 android:layout_alignLeft="@+id/titlee"
+                android:layout_alignStart="@+id/titlee"
+                android:layout_below="@+id/venue"
+                android:layout_marginBottom="4sp"
                 android:ems="10"
                 android:hint="venue"
-                android:layout_marginBottom="4sp"
                 android:inputType="textPersonName" />
 
             <TextView
                 android:id="@+id/imrl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_marginBottom="114dp"
                 android:text="Image_url :"
                 android:textSize="24sp"
@@ -306,9 +306,9 @@
                 android:id="@+id/imrl1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/imrl"
-                android:layout_alignStart="@+id/titlee"
                 android:layout_alignLeft="@+id/titlee"
+                android:layout_alignStart="@+id/titlee"
+                android:layout_below="@+id/imrl"
                 android:layout_marginTop="-114dp"
                 android:ems="10"
                 android:hint="iurl"
@@ -319,9 +319,9 @@
                 android:id="@+id/m1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/imrl1"
-                android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/imrl1"
                 android:text="Manager 1:"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -330,9 +330,9 @@
                 android:id="@+id/m1n"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/titlee"
                 android:layout_alignLeft="@+id/titlee"
                 android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/titlee"
                 android:layout_marginBottom="0dp"
                 android:ems="10"
                 android:hint="name"
@@ -342,9 +342,9 @@
                 android:id="@+id/m1p"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="4sp"
                 android:ems="10"
                 android:hint="contact no"
-                android:layout_marginBottom="4sp"
                 android:inputType="phone" />
 
             <TextView
@@ -368,9 +368,9 @@
                 android:id="@+id/m2p"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="4sp"
                 android:ems="10"
                 android:hint="Contact no."
-                android:layout_marginBottom="4sp"
                 android:inputType="phone" />
 
             <Button
