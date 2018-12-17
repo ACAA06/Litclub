@@ -69,7 +69,7 @@ LinearLayout internet;
         error=(TextView)findViewById(R.id.error);
         retry=(Button)findViewById(R.id.bt_retry);
         whoop=(TextView)findViewById(R.id.whoop);
-        if(check())
+        /*if(check())
         {
             internet.setVisibility(View.GONE);
             list();
@@ -79,7 +79,7 @@ LinearLayout internet;
             p1.setVisibility(View.GONE);
             internet.setVisibility(View.VISIBLE);
             //  gettitle();
-        }
+        }*/
         final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipelayout1);
         swipeRefreshLayout.setColorSchemeResources(R.color.refresh,R.color.refresh1,R.color.refresh2);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -93,28 +93,38 @@ LinearLayout internet;
                         swipeRefreshLayout.setRefreshing(false);
 
                         //gettitle();
-                        if(check()) {
-                            internet.setVisibility(View.GONE);
-                            list();
-                        }
-                        else {
-                            clubsadapter= new ClubAdapter(adminpanel.this,clubList1);
-                            listView.setAdapter(clubsadapter);
-                            internet.setVisibility(View.VISIBLE);
-
-                            p1.setVisibility(View.GONE);
-error.setText("No internet connections found. Check your connection or try again");
-whoop.setVisibility(View.VISIBLE);
-retry.setVisibility(View.VISIBLE);
-                            }
+                       refresh();
 
                     }
                 },2000);
             }
         });
     }
+    protected void onPostResume() {
+        if(clubsadapter!=null)
+            clubsadapter.clear();
 
+    refresh();
+    super.onPostResume();
 
+    }
+public void refresh()
+{
+    if(check()) {
+        internet.setVisibility(View.GONE);
+        list();
+    }
+    else {
+        clubsadapter= new ClubAdapter(adminpanel.this,clubList1);
+        listView.setAdapter(clubsadapter);
+        internet.setVisibility(View.VISIBLE);
+
+        p1.setVisibility(View.GONE);
+        error.setText("No internet connections found. Check your connection or try again");
+        whoop.setVisibility(View.VISIBLE);
+        retry.setVisibility(View.VISIBLE);
+    }
+}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -229,56 +239,7 @@ retry.setVisibility(View.VISIBLE);
 
 
 
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-                                           int pos, long id1) {
-                // TODO Auto-generated method stub
-                p=pos;
-                //Toast.makeText(adminpanel.this,""+id[p-1],Toast.LENGTH_SHORT).show();
-                new AlertDialog.Builder(adminpanel.this)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setTitle("Closing Activity")
-                        .setMessage("Are you sure you want to delete this event?")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
-                        {gdata g1=new gdata();
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                AsyncHttpClient client1 = new AsyncHttpClient();
-                                client1.addHeader("Authorization","Bearer "+g1.getToken());
-                                client1.get(getString(R.string.domain)+R.string.delete+"?id="+id[p-1],new JsonHttpResponseHandler()
-                                {
-                                    @Override
-                                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                                        try {
-                                            Toast.makeText(adminpanel.this,response.getString("message"),Toast.LENGTH_SHORT).show();
-                                            super.onSuccess(statusCode, headers, response);
-                                        }
-                                        catch(Exception e)
-                                        {
-                                            e.printStackTrace();
-                                        }
 
-                                    }
-                                    @Override
-                                    public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
-                                        // called when response HTTP status is "4XX" (eg. 401, 403, 404)
-                                        Toast.makeText(adminpanel.this,res,Toast.LENGTH_SHORT).show();
-
-                                    }
-                                });
-                                // finish();
-                            }
-
-                        })
-                        .setNegativeButton("No", null)
-                        .show();
-
-
-
-                return true;
-            }
-        });
     }
     public void addpost(View v)
     {

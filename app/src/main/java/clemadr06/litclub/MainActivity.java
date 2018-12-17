@@ -89,7 +89,7 @@ whoop=(TextView)findViewById(R.id.whoop);
         navigationView.setNavigationItemSelectedListener(this);
         listView = findViewById(R.id.card_listView);
         p=(ProgressBar)findViewById(R.id.progressBar1);
-       if(check())
+     /*  if(check())
        {
 internet.setVisibility(View.GONE);
            gettitle();
@@ -99,7 +99,7 @@ internet.setVisibility(View.GONE);
            p.setVisibility(View.GONE);
            internet.setVisibility(View.VISIBLE);
          //  gettitle();
-       }
+       }*/
         final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipelayout);
         swipeRefreshLayout.setColorSchemeResources(R.color.refresh,R.color.refresh1,R.color.refresh2);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -114,21 +114,7 @@ internet.setVisibility(View.GONE);
                        /* clubsadapter = new clubsadapter(MainActivity.this,clubList1);
                         listView.setAdapter(clubsadapter);
                          gettitle();*/
-                        if(check()) {
-                            internet.setVisibility(View.GONE);
-
-                                gettitle();
-
-                        }
-                        else{
-                            clubsadapter = new clubsadapter(MainActivity.this,clubList1);
-                            listView.setAdapter(clubsadapter);
-                            internet.setVisibility(View.VISIBLE);
-                            error.setText("No internet connections found. Check your connection or try again");
-                            whoop.setVisibility(View.VISIBLE);
-                            retry.setVisibility(View.VISIBLE);
-                            p.setVisibility(View.GONE);
-                        }
+                      refresh();
                     }
                 },3000);
             }
@@ -145,23 +131,27 @@ internet.setVisibility(View.GONE);
     protected void onPostResume() {
 if(clubsadapter!=null)
     clubsadapter.clear();
-if(check()) {
-            internet.setVisibility(View.GONE);
-            gettitle();
-
-        }
-        else{
-            clubsadapter = new clubsadapter(MainActivity.this,clubList1);
-            listView.setAdapter(clubsadapter);
-            internet.setVisibility(View.VISIBLE);
-            error.setText("No internet connections found. Check your connection or try again");
-            whoop.setVisibility(View.VISIBLE);
-            retry.setVisibility(View.VISIBLE);
-            p.setVisibility(View.GONE);
-        }
+refresh();
         super.onPostResume();
     }
+public void refresh()
+{
+    if(check()) {
+        internet.setVisibility(View.GONE);
+        gettitle();
 
+    }
+    else{
+        clubsadapter = new clubsadapter(MainActivity.this,clubList1);
+        listView.setAdapter(clubsadapter);
+        internet.setVisibility(View.VISIBLE);
+        error.setText("No internet connections found. Check your connection or try again");
+        whoop.setVisibility(View.VISIBLE);
+        retry.setVisibility(View.VISIBLE);
+        p.setVisibility(View.GONE);
+    }
+
+}
     public void retry(View view){
         if(check())
         { p.setVisibility(View.VISIBLE);

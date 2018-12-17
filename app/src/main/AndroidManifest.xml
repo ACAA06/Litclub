@@ -60,7 +60,7 @@
             android:parentActivityName="clemadr06.litclub.adminpanel"/>
         <activity android:name="clemadr06.litclub.editpost"
             android:parentActivityName="clemadr06.litclub.description1"
-            android:launchMode="singleTask"></activity>
+            android:launchMode="singleTop"></activity>
 
     </application>
 
