@@ -4,12 +4,15 @@ import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+
+import java.net.URL;
 import java.util.TimeZone;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,8 +48,8 @@ import cz.msebera.android.httpclient.Header;
 public class organise extends AppCompatActivity {
 EditText title;
     EditText subtitle;
-    TextView date1;
-    TextView date2,date3;
+    EditText date1;
+    EditText date2,date3;
     EditText venue;
     EditText description;
     EditText imurl;
@@ -56,7 +59,7 @@ EditText title;
     TextView ldate1,ldate2,ldate3;
     String d1,d2,d3;
     String format;
-    TextView t1,t2,t3;
+    EditText t1,t2,t3;
     int day1,month1,year1,day2,month2,year2,day3,month3,year3;
     Button setd1,setd2,setd3,sett1,sett2,sett3;
     String d;
@@ -83,27 +86,19 @@ int flag=1;
        // actionBar.setDisplayHomeAsUpEnabled(true);
         subtitle=(EditText)findViewById(R.id.sub2);
         description=(EditText)findViewById(R.id.desc1);
-        date1=(TextView)findViewById(R.id.edate1);
-        date2=(TextView)findViewById(R.id.edate2);
-        date3=(TextView)findViewById(R.id.edate3);
+        date1=(EditText)findViewById(R.id.edate1);
+        date2=(EditText)findViewById(R.id.edate2);
         venue=(EditText)findViewById(R.id.venue1);
         imurl=(EditText)findViewById(R.id.imrl1);
         m1name=(EditText)findViewById(R.id.m1n);
         m1ph =(EditText)findViewById(R.id.m1p);
         m2name=(EditText)findViewById(R.id.m2n);
         m2ph=(EditText)findViewById(R.id.m2p);
-        setd1=(Button)findViewById(R.id.setd1);
-        setd2=(Button)findViewById(R.id.setd2);
-        setd3=(Button)findViewById(R.id.setd3);
-        sett1=(Button)findViewById(R.id.sett1);
-        sett2=(Button)findViewById(R.id.sett2);
-        sett3=(Button)findViewById(R.id.sett3);
-        t1=(TextView)findViewById(R.id.etime1);
-        t2=(TextView)findViewById(R.id.etime2);
-        t3=(TextView)findViewById(R.id.etime3);
+
+        t1=(EditText)findViewById(R.id.etime1);
+        t2=(EditText)findViewById(R.id.etime2);
+
 pl=(LinearLayout)findViewById(R.id.parent);
-        set=(Spinner)findViewById(R.id.type_spinner);
-        set.setSelection(2);
         mycurrentdate = Calendar.getInstance();
         mycurrenttime = Calendar.getInstance();
         day = mycurrentdate.get(Calendar.DAY_OF_MONTH);
@@ -114,17 +109,15 @@ pl=(LinearLayout)findViewById(R.id.parent);
         min = mycurrenttime.get(Calendar.MINUTE);
         ldate1=(TextView)findViewById(R.id.date1);
         ldate2=(TextView)findViewById(R.id.date2);
-        ldate3=(TextView)findViewById(R.id.date3);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarorg);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("LitClub");
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // days=set.getSelectedItem().toString();
 
 
-
-
-
-
-       // days=set.getSelectedItem().toString();
-
-
-        setd1.setOnClickListener(new View.OnClickListener() {
+        date1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(organise.this, new DatePickerDialog.OnDateSetListener() {
@@ -154,8 +147,7 @@ pl=(LinearLayout)findViewById(R.id.parent);
                                 d1=year1 + "-0" + monthyear + "-0" + dayofmonth;
                             }
                         }
-                        Calendar calendar1=new GregorianCalendar(year1,month1-1,day1);
-                        timestamp1= TimeUnit.MILLISECONDS.toSeconds(calendar1.getTimeInMillis());
+
                     }
                 }, year, month- 1, day);
                 datePickerDialog.show();
@@ -169,7 +161,7 @@ pl=(LinearLayout)findViewById(R.id.parent);
                 timePickerDialog.show();*/
             }
         });
-        setd2.setOnClickListener(new View.OnClickListener() {
+        date2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(organise.this, new DatePickerDialog.OnDateSetListener() {
@@ -198,8 +190,7 @@ pl=(LinearLayout)findViewById(R.id.parent);
                                 d2=year2 + "-0" + monthyear + "-0" + dayofmonth;
                             }
                         }
-                        Calendar calendar2=new GregorianCalendar(year2,month2-1,day2);
-                        timestamp2= TimeUnit.MILLISECONDS.toSeconds(calendar2.getTimeInMillis());
+
                     }
                 }, year, month - 1, day);
                 datePickerDialog.show();
@@ -213,54 +204,10 @@ pl=(LinearLayout)findViewById(R.id.parent);
                 timePickerDialog.show();*/
             }
         });
-        setd3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(organise.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int monthyear, int dayofmonth) {
-                        monthyear = monthyear + 1;
-                        day3=dayofmonth;
-                        month3=monthyear;
-                        year3=year;
-                        if (dayofmonth < 10 && monthyear < 10)
-                        { date3.setText(year + "-0" + monthyear + "-0" + dayofmonth);
-                            d3=year3 + "-0" + monthyear + "-0" + dayofmonth;}
-                        else {
-                            if (dayofmonth < 10)
-                            {date3.setText(year + "-" + monthyear + "-0" + dayofmonth);
-                                d3=year3 + "-0" + monthyear + "-0" + dayofmonth;}
-                            else {
-                                date3.setText(year + "-" + monthyear + "-" + dayofmonth);
-                                d3=year3 + "-0" + monthyear + "-0" + dayofmonth;
-                            }
-                            if (monthyear < 10)
-                            { date3.setText(year + "-0" + monthyear + "-" + dayofmonth);
-                                d3=year3 + "-0" + monthyear + "-0" + dayofmonth;}
-                            else {
-                                date3.setText(year + "-" + monthyear + "-" + dayofmonth);
-                                d3=year3 + "-0" + monthyear + "-0" + dayofmonth;
-                            }
-                        }
-                        Calendar calendar3=new GregorianCalendar(year3,month3-1,day3);
-                        timestamp3= TimeUnit.MILLISECONDS.toSeconds(calendar3.getTimeInMillis());
 
-                    }
-                }, year, month - 1, day);
-                datePickerDialog.show();
-              /*  TimePickerDialog timePickerDialog = new TimePickerDialog(organise.this, new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker timePicker, int hr, int min) {
-                        selectedtimeformat(hr);
-                        d+= " "+hr + " : " + min + " "+ format;
-                    }
-                }, hr, min, true);
-                timePickerDialog.show();*/
-            }
-        });
        // date1.setText(d);
 
-        sett1.setOnClickListener(new View.OnClickListener() {
+        t1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(organise.this, new TimePickerDialog.OnTimeSetListener() {
@@ -288,7 +235,7 @@ pl=(LinearLayout)findViewById(R.id.parent);
             }
         });
 
-        sett2.setOnClickListener(new View.OnClickListener() {
+        t2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(organise.this, new TimePickerDialog.OnTimeSetListener() {
@@ -317,35 +264,7 @@ pl=(LinearLayout)findViewById(R.id.parent);
             }
         });
 
-        sett3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                TimePickerDialog timePickerDialog = new TimePickerDialog(organise.this, new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker timePicker, int hr, int min) {
-                        selectedtimeformat(hr);
-                        if(hr>12){
-                            if(min<10){
-                                t3.setText(hr-12 + ":0" + min + "" + format);
-                                ts3=hr-12 + ":0" + min + "" + format;}
-                                else{ t3.setText(hr-12 + ":" + min + "" + format);
-                                      ts3=hr-12 + ":0" + min + "" + format; }
-                        }
-                        else{
-                            if(min<10){
-                                t3.setText(hr + ":0" + min + "" + format);
-                                ts3=hr + ":0" + min + "" + format;}
-                                else{
-                                t3.setText(hr + ":" + min + "" + format);
-                                ts3=hr-12 + ":0" + min + "" + format;
-                                }
-                        }
-                    }
-                }, hr, min, true);
-                timePickerDialog.show();
-            }
-        });
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+
       //  d1=sdf.parse(date1.getText().toString());
         //Timestamp ts=new Timestamp(d1);
        /* Calendar calendar1=new GregorianCalendar(year1,month1,day1);
@@ -356,14 +275,28 @@ pl=(LinearLayout)findViewById(R.id.parent);
      //timestamp3= TimeUnit.MILLISECONDS.toSeconds(calendar3.getTimeInMillis());
         a1 =d1+" "+ts1;
         a2 =d2+" "+ts2;
-        a3 =d3+" "+ts3;
+
 
 
 
     }
+    public static boolean isValid(String url)
+    {
+        /* Try creating a valid URL */
+        try {
+            new URL(url).toURI();
+            return true;
+        }
+
+        // If there was an Exception
+        // while creating URL object
+        catch (Exception e) {
+            return false;
+        }
+    }
     public void org1(){
-        Log.e("Calendar", " " + days + " " + date1.getText().toString() + " " + t1.getText().toString() + " " + date2.getText().toString() + " " + t2.getText().toString() + " " + date3.getText().toString() + " " + t3.getText().toString());
-        Log.e("year", " " + timestamp1 + " " + timestamp2 + " " + timestamp3);
+       // Log.e("Calendar", " " + days + " " + date1.getText().toString() + " " + t1.getText().toString() + " " + date2.getText().toString() + " " + t2.getText().toString() + " " + date3.getText().toString() + " " + t3.getText().toString());
+        //Log.e("year", " " + timestamp1 + " " + timestamp2 + " " + timestamp3);
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("title", title.getText().toString());
@@ -375,22 +308,11 @@ pl=(LinearLayout)findViewById(R.id.parent);
         params.put("m1_contact", m1ph.getText().toString());
         params.put("m2_name", m2name.getText().toString());
         params.put("m2_contact", m2ph.getText().toString());
-        if (days.equals("1")) {
-            params.put("date3", date1.getText().toString() + " " + t1.getText().toString());
-            params.put("enddate", timestamp1);
+        params.put("startdate", date1.getText().toString());
+        // + " " + t1.getText().toString());
+        params.put("enddate", date2.getText().toString());
+        // + " " + t2.getText().toString());
 
-        } else {
-            if (days.equals("2")) {
-                params.put("date2", date1.getText().toString() + " " + t1.getText().toString());
-                params.put("date3", date2.getText().toString() + " " + t2.getText().toString());
-                params.put("enddate", timestamp2);
-            } else {
-                params.put("date1", date1.getText().toString() + " " + t1.getText().toString());
-                params.put("date2", date2.getText().toString() + " " + t2.getText().toString());
-                params.put("date3", date3.getText().toString() + " " + t3.getText().toString());
-                params.put("enddate", timestamp3);
-            }
-        }
 
 
 
@@ -399,7 +321,7 @@ pl=(LinearLayout)findViewById(R.id.parent);
         s = g.getToken();
         client.addHeader("Authorization", "Bearer " + s);
         Log.e("token", s);
-        client.post("https://dev.rajkumaar.co.in/clement/zara/api/addpost.php", params, new JsonHttpResponseHandler() {
+        client.post(getString(R.string.domain)+"/api/create", params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Toast.makeText(organise.this, "s" + timestamp1, Toast.LENGTH_SHORT).show();
@@ -442,8 +364,12 @@ pl=(LinearLayout)findViewById(R.id.parent);
         {   flag=0;
             venue.setError("Field cannot be left blank.");
         }
-        if(days.equals("1")) {
-            if(date1.getText().length()==0)
+        if(!isValid(imurl.getText().toString()))
+        { flag=0;
+            imurl.setError("Invalid url");
+        }
+
+        if(date1.getText().length()==0)
             {   flag=0;
                 date1.setError("Field cannot be left blank.set value");
             }
@@ -453,70 +379,27 @@ pl=(LinearLayout)findViewById(R.id.parent);
 
             }
 
+        if(date2.getText().length()==0)
+        {   flag=0;
+            date2.setError("Field cannot be left blank.set value");
         }
-            else{
-                if(days.equals("2"))
-                {
-                if(date1.getText().length()==0)
-                {   flag=0;
-                    date1.setError("Field cannot be left blank.set value");
-                }
-                if(t1.getText().length()==0)
-                {   flag=0;
-                    t1.setError("Field cannot be left blank.set value");
+        if(t2.getText().length()==0)
+        {   flag=0;
+            t2.setError("Field cannot be left blank.set value");
 
-                }
-                if(date2.getText().length()==0)
-                {   flag=0;
-                    date2.setError("Field cannot be left blank.set value");
-                }
-                if(t2.getText().length()==0)
-                {   flag=0;
-                    t2.setError("Field cannot be left blank.set value");
+        }
 
-                }
+        if(flag==1)
+        {
+            org1();
+        }
+
 
                 }
 
 
-                else{
 
 
-                    if(date1.getText().length()==0)
-                    {   flag=0;
-                         date1.setError("Field cannot be left blank.set value");
-                    }
-                    if(t1.getText().length()==0)
-                     {  flag=0;
-                        t1.setError("Field cannot be left blank.set value");
-
-                        }
-                        if(date2.getText().length()==0)
-                        {   flag=0;
-                            date2.setError("Field cannot be left blank.set value");
-                         }
-                        if(t2.getText().length()==0)
-                        {   flag=0;
-                            t2.setError("Field cannot be left blank.set value");
-
-                        }
-                         if(date3.getText().length()==0)
-                         {  flag=0;
-                            date3.setError("Field cannot be left blank.set value");
-                         }
-                         if(t3.getText().length()==0)
-                            {   flag=0;
-                                t3.setError("Field cannot be left blank.set value");
-
-                            }
-                          }
-                }
-Log.e("flag"," "+flag);
-    if(flag==1)
-    {
-        org1();
-    }
-    }
     public void selectedtimeformat(int h)
     {
         if(h==0)
@@ -543,64 +426,9 @@ Log.e("flag"," "+flag);
             }
         }
     }
-    public void dismiss(View v)
-    {
-            days=set.getSelectedItem().toString();
 
-        //dial.dismiss();
-        Toast.makeText(organise.this,days, Toast.LENGTH_SHORT).show();
-       onAdd();
-    }
 
-    public void onAdd() {
-        if(days.equals("1"))
-        {
-            date3.setVisibility(View.GONE);
-            date2.setVisibility(View.GONE);
-            setd2.setVisibility(View.GONE);
-            setd3.setVisibility(View.GONE);
-            sett2.setVisibility(View.GONE);
-            sett3.setVisibility(View.GONE);
-            t2.setVisibility(View.GONE);
-            t3.setVisibility(View.GONE);
-            ldate3.setVisibility(View.GONE);
-            ldate2.setVisibility(View.GONE);
-        }
-        else{if(days.equals("2"))
-        {
-            date3.setVisibility(View.GONE);
-            setd3.setVisibility(View.GONE);
-            sett3.setVisibility(View.GONE);
-            t3.setVisibility(View.GONE);
-            ldate3.setVisibility(View.GONE);
-            date2.setVisibility(View.VISIBLE);
-            setd2.setVisibility(View.VISIBLE);
-            sett2.setVisibility(View.VISIBLE);
-            t2.setVisibility(View.VISIBLE);
-            ldate2.setVisibility(View.VISIBLE);
-        }else{
 
-            date1.setVisibility(View.VISIBLE);
-            setd1.setVisibility(View.VISIBLE);
-            sett1.setVisibility(View.VISIBLE);
-            t1.setVisibility(View.VISIBLE);
-            ldate1.setVisibility(View.VISIBLE);
-
-            date2.setVisibility(View.VISIBLE);
-            setd2.setVisibility(View.VISIBLE);
-            sett2.setVisibility(View.VISIBLE);
-            t2.setVisibility(View.VISIBLE);
-            ldate2.setVisibility(View.VISIBLE);
-
-            date3.setVisibility(View.VISIBLE);
-            setd3.setVisibility(View.VISIBLE);
-            sett3.setVisibility(View.VISIBLE);
-            t3.setVisibility(View.VISIBLE);
-            ldate3.setVisibility(View.VISIBLE);
-        }
-
-        }
-    }
 
 
 }

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
@@ -40,7 +41,7 @@ public class description extends AppCompatActivity {
     TextView date1,date2,date3;
     TextView venue;
     TextView title;
-    TextView subtitle;
+    TextView subtitle,by;
     TextView m1n;
     TextView m1ph;
     TextView m2n;
@@ -48,6 +49,8 @@ public class description extends AppCompatActivity {
     ImageView img;
     ImageView img1;
     String d1,d2,d3;
+    ProgressBar p;
+    LinearLayout error,descxml;
 int s;
 String url;
     boolean isImageFitToScreen;
@@ -71,95 +74,99 @@ String url;
         m1ph=(TextView)findViewById(R.id.m1po);
         m2ph=(TextView)findViewById(R.id.m2po);
         img=(ImageView) findViewById(R.id.header);
+        by=(TextView)findViewById(R.id.byline);
         ActionBar actionBar = getActionBar();
-        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
-//        toolbar.setTitle("LitClubs");
-  /*      toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-*/
+        error=(LinearLayout)findViewById(R.id.lyt_no_connection1);
+        descxml=(LinearLayout)findViewById(R.id.linear);
+        error.setVisibility(View.GONE);
+        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbarx);
+        toolbar.setTitle("LitClubs");
+toolbar.setBackgroundResource(R.drawable.grad);
         //actionBar.setDisplayHomeAsUpEnabled(true);
-        toolbar = (Toolbar) findViewById(R.id.anim_toolbar);
+      //  toolbar = (Toolbar) findViewById(R.id.to);
+        p=(ProgressBar)findViewById(R.id.progressBardesc);
+        p.setVisibility(View.VISIBLE);
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null)
+       if (getSupportActionBar() != null)
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle("LitClub");
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-        s= getIntent().getExtras().getInt("id");
-        Toast.makeText(description.this," "+s,Toast.LENGTH_SHORT).show();
-        AsyncHttpClient client=new AsyncHttpClient();
-        client.get("https://dev.rajkumaar.co.in/clement/zara/api/posts.php",new JsonHttpResponseHandler(){
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
-                    JSONArray jsonArray=response.getJSONArray("data");
-                    for(int j=0;j<jsonArray.length();j++) {
-                        JSONObject obj = jsonArray.getJSONObject(j);
-                        if(obj.getInt("id")==s) {
-                            desc.setText(obj.getString("description"));
-                            // time.setText(obj.getString("timing"));
-                            venue.setText(obj.getString("venue"));
-                            title.setText(obj.getString("title"));
-                            d1 = obj.getString("date1");
-                            d2 = obj.getString("date2");
-                            d3 = obj.getString("date3");
-                            if (d1.equals("null") && d2.equals("null")) {
-                                date1.setText(d3);
-                                date2.setVisibility(View.GONE);
-                                date3.setVisibility(View.GONE);
-                            } else {
-                                if (d1.equals("null")) {
-                                    date1.setText(d2);
-                                    date2.setText(d3);
-                                    date3.setVisibility(View.GONE);
-                                } else {
-                                    date1.setText(obj.getString("date1"));
-                                    date2.setText(obj.getString("date2"));
-                                    date3.setText(obj.getString("date3"));
+       // collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+       // collapsingToolbar.setTitle("LitClub");
 
+        get();
+            }
+            public void retry(View view)
+            {   error.setVisibility(View.GONE);
+            p.setVisibility(View.VISIBLE);
+                get();
+
+            }
+            public void get()
+            {
+                s= getIntent().getExtras().getInt("id");
+                Toast.makeText(description.this," "+s,Toast.LENGTH_SHORT).show();
+                AsyncHttpClient client=new AsyncHttpClient();
+                client.get(getString(R.string.domain)+getString(R.string.posts),new JsonHttpResponseHandler(){
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        try {descxml.setVisibility(View.VISIBLE);
+                            JSONArray jsonArray=response.getJSONArray("data");
+                            for(int j=0;j<jsonArray.length();j++) {
+                                JSONObject obj = jsonArray.getJSONObject(j);
+                                if(obj.getInt("id")==s) {
+                                    desc.setText(obj.getString("description"));
+                                    // time.setText(obj.getString("timing"));
+                                    by.setText("By "+obj.getString("author"));
+                                    venue.setText(obj.getString("venue"));
+                                    title.setText(obj.getString("title"));
+                                    d1 = obj.getString("startdate");
+                                    d2 = obj.getString("enddate");
+                                    date1.setText(d1);
+                                    date2.setText(d2);
+                                    subtitle.setText(obj.getString("subtitle"));
+                                    m1n.setText(obj.getString("manager1_name"));
+                                    m2n.setText(obj.getString("manager2_name"));
+                                    m1ph.setText(obj.getString("manager1_contact"));
+                                    m2ph.setText(obj.getString("manager2_contact"));
+                                    url = obj.getString("img_url");
+                                    //  id = obj.getInt("id");
+                                    Picasso.with(description.this)
+                                            .load(url)
+
+                                            .error(R.drawable.placeholder)
+                                            .into(img);
+                                    //time.setText(obj.getString("timing"));
                                 }
                             }
-                            subtitle.setText(obj.getString("subtitle"));
-                            m1n.setText(obj.getString("manager1_name"));
-                            m2n.setText(obj.getString("manager2_name"));
-                            m1ph.setText(obj.getString("manager1_contact"));
-                            m2ph.setText(obj.getString("manager2_contact"));
-                            url = obj.getString("img_url");
-                          //  id = obj.getInt("id");
-                            Picasso.with(description.this)
-                                    .load(url)
-                                    // .placeholder(R.drawable.ic_placeholder)
-                                    //.error(R.drawable.ic_error_fallback)
-                                    .into(img1);
-                            //time.setText(obj.getString("timing"));
+
+
                         }
+                        catch(Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+
+                        super.onSuccess(statusCode, headers, response);
                     }
 
-
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                        error.setVisibility(View.VISIBLE);
+                        descxml.setVisibility(View.GONE);
+                        super.onFailure(statusCode, headers, throwable, errorResponse);
                     }
-                    catch(Exception e)
-                    {
-                        e.printStackTrace();
+
+                    @Override
+                    public void onFinish() {
+                        p.setVisibility(View.GONE);
+                        super.onFinish();
                     }
+                });
 
-                super.onSuccess(statusCode, headers, response);
-        }
-    });
-
-        img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                img.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
                /* Dialog dialog = new Dialog(description.this);
                 dialog.setContentView(R.layout.imgdialog);
 
@@ -186,17 +193,19 @@ String url;
                         image.setLayoutParams(layoutParams);
 
 */
-                Dialog dialog = new Dialog(description.this);
-                dialog.setContentView(R.layout.imgdialog);
-                 img1=(ImageView) dialog.findViewById(R.id.imaged);
-                Picasso.with(description.this)
-                        .load(url)
-                        .into(img1);
+                        Dialog dialog = new Dialog(description.this);
+                        dialog.setContentView(R.layout.imgdialog);
+                        img1=(ImageView) dialog.findViewById(R.id.imaged);
+                        Picasso.with(description.this)
+                                .load(url)
+                                .error(R.drawable.placeholder)
+                                .into(img1);
 
-                dialog.show();
+                        dialog.show();
                     }
                 });
             }
+
 
 }
     /*public static Bitmap getBitmapFromURL(String src) {

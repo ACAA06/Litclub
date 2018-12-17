@@ -7,14 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import clemadr06.LitClub.R;
-
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 public class clubsadapter extends ArrayAdapter<club>{
-
+    LinearLayout internet;
     clubsadapter(Context context, ArrayList<club> clubs) {
 
         super(context, 0,clubs);
@@ -54,9 +57,14 @@ public class clubsadapter extends ArrayAdapter<club>{
 
 
         TextView subtitle=listItemView.findViewById(R.id.line2);
-        subtitle.setVisibility(View.VISIBLE);
-        subtitle.setText(current.getSubtitle());
-        TextView author=listItemView.findViewById(R.id.line3);
+        if(current.getSubtitle().equals(""))
+        {
+            subtitle.setVisibility(View.GONE);
+        }
+        else {
+            subtitle.setVisibility(View.VISIBLE);
+            subtitle.setText(current.getSubtitle());
+        }TextView author=listItemView.findViewById(R.id.line3);
         author.setText(current.getAuthor());
        /* if(current.getSubtitle()!=null) {
 
@@ -81,8 +89,16 @@ public class clubsadapter extends ArrayAdapter<club>{
             public void onClick(View view) {
 
 
-
+                if(isNetworkAvailable()){
                     getContext().startActivity(new Intent(getContext(),description.class).putExtra("id",current.getId()));
+                }
+                else{
+                   // Toast.makeText(MainActivity.class,"Connect to Internet",Toast.LENGTH_SHORT).show();
+                    //  p.setVisibility(View.GONE);
+
+
+                }
+
 
             }
 
@@ -94,5 +110,10 @@ public class clubsadapter extends ArrayAdapter<club>{
 
         return listItemView;
 
+    }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager= (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

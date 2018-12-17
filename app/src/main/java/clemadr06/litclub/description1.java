@@ -7,8 +7,12 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -37,6 +41,8 @@ public class description1 extends AppCompatActivity {
     int s;
     int id;
     String url;
+    ProgressBar p;
+    LinearLayout error,descxml;
     boolean isImageFitToScreen;
 
     CollapsingToolbarLayout collapsingToolbar;
@@ -58,36 +64,65 @@ public class description1 extends AppCompatActivity {
         m2ph1=(TextView)findViewById(R.id.m2po1);
         img1=(ImageView) findViewById(R.id.header1);
         ActionBar actionBar = getActionBar();
-        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
-//        toolbar.setTitle("LitClubs");
-  /*      toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-*/
-        //actionBar.setDisplayHomeAsUpEnabled(true);
-        toolbar = (Toolbar) findViewById(R.id.anim_toolbar1);
+        error=(LinearLayout)findViewById(R.id.lyt_no_connection2);
+        error.setVisibility(View.GONE);
+        descxml=(LinearLayout)findViewById(R.id.linear1) ;
+        p=(ProgressBar)findViewById(R.id.progressBardesc1);
+        p.setVisibility(View.VISIBLE);
+        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbarxx);
+     toolbar.setTitle("LitClubs");
+
+
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null)
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar1);
-        collapsingToolbar.setTitle("LitClub");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
+
+get();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.edit,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId())
+        {
+            case R.id.editpost:
+                Intent i = new Intent(getApplicationContext(), editpost.class);
+                i.putExtra("id",id);
+                startActivity(i);
+                finish();
+                break;
+
+            case R.id.home:
+                finish();
+                break;
+        }
+        return true;
+    }
+    public void edit(View v)
+    {
+        Intent i = new Intent(getApplicationContext(), editpost.class);
+        i.putExtra("id",id);
+        startActivity(i);
+    }
+    public void get()
+    {
         s= getIntent().getIntExtra("id",0);
         AsyncHttpClient client=new AsyncHttpClient();
-        client.get("https://dev.rajkumaar.co.in/clement/zara/api/posts.php",new JsonHttpResponseHandler(){
+        client.get(getString(R.string.domain)+getString(R.string.posts),new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
+                try {descxml.setVisibility(View.VISIBLE);
                     JSONArray jsonArray=response.getJSONArray("data");
                     for(int j=0;j<jsonArray.length();j++) {
                         JSONObject obj = jsonArray.getJSONObject(j);
@@ -124,8 +159,8 @@ public class description1 extends AppCompatActivity {
                             id = obj.getInt("id");
                             Picasso.with(description1.this)
                                     .load(url)
-                                    // .placeholder(R.drawable.ic_placeholder)
-                                    //.error(R.drawable.ic_error_fallback)
+
+                                    .error(R.drawable.placeholder)
                                     .into(img1);
                             //time.setText(obj.getString("timing"));
                         }
@@ -139,6 +174,20 @@ public class description1 extends AppCompatActivity {
                 }
 
                 super.onSuccess(statusCode, headers, response);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                error.setVisibility(View.VISIBLE);
+                descxml.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onFinish() {
+
+                p.setVisibility(View.GONE);
+                super.onFinish();
             }
         });
 
@@ -173,19 +222,22 @@ public class description1 extends AppCompatActivity {
 */
                 Dialog dialog = new Dialog(description1.this);
                 dialog.setContentView(R.layout.imgdialog);
-                img1=(ImageView) dialog.findViewById(R.id.imaged);
+                img11=(ImageView) dialog.findViewById(R.id.imaged);
                 Picasso.with(description1.this)
                         .load(url)
+                        .error(R.drawable.placeholder)
+
                         .into(img11);
 
                 dialog.show();
             }
         });
+
     }
-    public void edit(View v)
-    {
-        Intent i = new Intent(getApplicationContext(), editpost.class);
-        i.putExtra("id",id);
-        startActivity(i);
+    public void retry(View view)
+    {   error.setVisibility(View.GONE);
+        p.setVisibility(View.VISIBLE);
+        get();
+
     }
 }

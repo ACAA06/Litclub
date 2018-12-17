@@ -31,6 +31,43 @@
         android:cacheColorHint="@android:color/transparent"
         android:divider="@null"
         android:dividerHeight="10dp" />
+        <!-- empty view -->
+
+            <LinearLayout android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end" android:orientation="vertical"
+                android:id="@+id/lyt_no_connection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:layout_centerInParent="true">
+                <ImageView android:layout_width="300dp"
+                    android:layout_height="300dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/img_no_internet_satellite" />
+                <TextView
+                    android:textStyle="bold"
+                    android:id="@+id/whoop"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Whoops!!" />
+                <TextView
+                    android:textColor="@color/colorPrimary"
+                    android:layout_below="@+id/whoop"
+android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:id="@+id/error" />
+                <Button  android:id="@+id/bt_retry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+                    android:layout_gravity="center"
+                    android:text="RETRY"
+                    android:onClick="retry"/>
+            </LinearLayout>
+
     </RelativeLayout>
 
 </android.support.v4.widget.SwipeRefreshLayout  >

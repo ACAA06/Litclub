@@ -6,34 +6,48 @@
     android:layout_height="match_parent"
     tools:context="clemadr06.litclub.editpost"
     >
-
+    <android.support.v7.widget.Toolbar android:layout_height="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:background="?attr/colorPrimary"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:id="@+id/toolbaredit"/>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbaredit">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/titleedit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Title :" />
+                android:fontFamily="sans-serif"
+                android:text="TITLE"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/titleeedit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edittext"
+                android:layout_height="30dp"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:layout_below="@+id/title"
-                android:layout_marginLeft="24dp"
-                android:layout_marginStart="24dp"
+                android:layout_marginBottom="4sp"
                 android:ems="10"
-                android:hint="title"
+                android:hint="Title"
                 android:inputType="textPersonName" />
 
             <TextView
@@ -43,15 +57,22 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/titleeedit"
-                android:text="SubTitle :" />
+                android:text="SUBTITLE"
+                android:layout_marginTop="10dp"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/sub2edit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_alignLeft="@+id/titleeedit"
                 android:layout_alignStart="@+id/titleeedit"
-                android:layout_below="@+id/subedit"
+                android:layout_below="@+id/sub"
+                android:background="@drawable/edittext"
+                android:layout_marginBottom="4sp"
+                android:layout_marginTop="5dp"
                 android:ems="10"
                 android:hint="SubTitle"
                 android:inputType="textPersonName" />
@@ -63,48 +84,32 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/sub2edit"
-                android:text="Description :" />
+                android:layout_marginTop="10dp"
+                android:text="DESCRIPTION"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/desc1edit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_alignLeft="@+id/titleeedit"
                 android:layout_alignStart="@+id/titleeedit"
                 android:layout_below="@+id/descedit"
+                android:background="@drawable/edittext"
+                android:layout_marginBottom="4sp"
+                android:layout_marginTop="5dp"
                 android:ems="10"
-                android:hint="description"
+                android:hint="Description"
                 android:inputType="textMultiLine" />
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-                <TextView
-                    android:id="@+id/number_edit_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="5"
-                    android:text="set no of days :"
-                    android:inputType="phone"/>
 
-                <Spinner
-                    android:id="@+id/type_spinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:entries="@array/types"
-                    android:gravity="right" />
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="set"
-                    android:onClick="dismiss"/>
-            </LinearLayout>
             <LinearLayout
+                android:id="@+id/parentedit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:id="@+id/parentedit">
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/date1edit"
                     android:layout_width="match_parent"
@@ -112,42 +117,48 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_below="@+id/desc1edit"
-                    android:text="Date1 :" />
+                    android:text="START DATE"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_alignLeft="@+id/titleeedit"
                     android:layout_alignStart="@+id/titleeedit"
-                    android:layout_below="@+id/date1edit">
-                    <TextView
-                        android:id="@+id/edate1edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-
-                        android:ems="10"
-                        android:inputType="time" />
-                    <TextView
-                        android:id="@+id/etime1edit"
+                    android:layout_below="@+id/date1edit"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
+                    <EditText
+                        android:id="@+id/date1eedit"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@+id/title"
+                        android:layout_marginBottom="4sp"
                         android:ems="10"
-                        android:inputType="time" />
+                        android:hint="Date"
+                        android:background="@drawable/edittext"
+                        android:inputType="textPersonName"
+                        android:focusable="false"/>
+                    <EditText
+                        android:id="@+id/time1eedit"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="@drawable/edittext"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@+id/date1eedit"
+                        android:layout_marginBottom="4sp"
+                        android:ems="10"
+                        android:hint="Time"
+                        android:inputType="textPersonName"
+                        android:focusable="false"/>
+
                 </LinearLayout>
 
 
-                <Button
-                    android:id="@+id/setd1edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Button" />
-                <Button
-                    android:id="@+id/sett1edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Button" />
             </LinearLayout>
 
             <TextView
@@ -157,77 +168,49 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/desc1edit"
-                android:text="Date2 :" />
+                android:layout_marginTop="10dp"
+                android:text="END DATE"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_alignLeft="@+id/titleeedit"
                 android:layout_alignStart="@+id/titleeedit"
-                android:layout_below="@+id/date2edit">
-                <TextView
-                    android:id="@+id/edate2edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                android:layout_below="@+id/date2edit"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/date2eedit"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/title"
+                    android:background="@drawable/edittext"
+                    android:layout_marginBottom="4sp"
                     android:ems="10"
-                    android:inputType="time" />
-                <TextView
-                    android:id="@+id/etime2edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:hint="Date"
+                    android:inputType="textPersonName"
+                    android:focusable="false"/>
+                <EditText
+                    android:id="@+id/time2eedit"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/date2eedit"
+                    android:layout_marginBottom="4sp"
                     android:ems="10"
-                    android:inputType="time" />
+                    android:background="@drawable/edittext"
+                    android:hint="Time"
+                    android:inputType="textPersonName"
+                    android:focusable="false"/>
 
             </LinearLayout>
-            <Button
-                android:id="@+id/setd2edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Button" />
-            <Button
-                android:id="@+id/sett2edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Button" />
-            <TextView
-                android:id="@+id/date3edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/desc1edit"
-                android:text="Date3 :" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_alignLeft="@+id/titleeedit"
-                android:layout_alignStart="@+id/titleeedit"
-                android:layout_below="@+id/date3edit">
 
-                <TextView
-                    android:id="@+id/edate3edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="time" />
-                <TextView
-                    android:id="@+id/etime3edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="time" />
-            </LinearLayout>
-            <Button
-                android:id="@+id/setd3edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Button" />
-            <Button
-                android:id="@+id/sett3edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Button" />
 
             <TextView
                 android:id="@+id/venueedit"
@@ -236,16 +219,22 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/time1edit"
-                android:text="Venue :" />
+                android:text="VENUE"
+                android:layout_marginTop="10dp"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/venue1edit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_height="30dp"
                 android:layout_alignLeft="@+id/titleeedit"
                 android:layout_alignStart="@+id/titleeedit"
                 android:layout_below="@+id/venueedit"
+                android:layout_marginBottom="4sp"
                 android:ems="10"
+                android:background="@drawable/edittext"
                 android:hint="venue"
                 android:inputType="textPersonName" />
 
@@ -257,18 +246,23 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="114dp"
-                android:text="Image_url :" />
+                android:layout_marginTop="10dp"
+                android:text="IMAGE"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/imrl1edit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
+                android:background="@drawable/edittext"
                 android:layout_alignLeft="@+id/titleeedit"
                 android:layout_alignStart="@+id/titleeedit"
                 android:layout_below="@+id/imrledit"
                 android:layout_marginTop="-114dp"
                 android:ems="10"
                 android:hint="iurl"
+
                 android:inputType="textPersonName" />
 
             <TextView
@@ -277,16 +271,22 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
                 android:layout_below="@+id/imrl1edit"
-                android:text="Manager 1:" />
+                android:text="MANAGER 1"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/m1nedit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_alignLeft="@+id/titleeedit"
                 android:layout_alignParentBottom="true"
+                android:background="@drawable/edittext"
                 android:layout_alignStart="@+id/titleeedit"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="0dp"
                 android:ems="10"
                 android:hint="name"
                 android:inputType="textPersonName" />
@@ -294,8 +294,11 @@
             <EditText
                 android:id="@+id/m1pedit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginBottom="4sp"
+                android:layout_marginTop="5dp"
                 android:ems="10"
+                android:background="@drawable/edittext"
                 android:hint="contact no"
                 android:inputType="phone" />
 
@@ -303,30 +306,40 @@
                 android:id="@+id/m2edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Manager 2:" />
+                android:text="MANAGER 2"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/m2nedit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="0sp"
                 android:ems="10"
+                android:background="@drawable/edittext"
                 android:hint="name"
                 android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/m2pedit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginBottom="4sp"
                 android:ems="10"
-                android:hint="conatct no"
+                android:background="@drawable/edittext"
+                android:layout_marginTop="5dp"
+                android:hint="Contact no."
                 android:inputType="phone" />
 
             <Button
                 android:id="@+id/orgedit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="organise"
-                android:onClick="orga"/>
+                android:onClick="orga"
+                android:layout_marginTop="10dp"
+                android:text="organise" />
         </LinearLayout>
     </ScrollView>
 

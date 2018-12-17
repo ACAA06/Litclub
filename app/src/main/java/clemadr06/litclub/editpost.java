@@ -4,12 +4,15 @@ import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+
+import java.net.URL;
 import java.util.TimeZone;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,8 +50,8 @@ import cz.msebera.android.httpclient.Header;
 public class editpost extends AppCompatActivity {
     EditText title;
     EditText subtitle;
-    TextView date1;
-    TextView date2,date3;
+    EditText date1;
+    EditText date2,date3;
     EditText venue;
     EditText description;
     EditText imurl;
@@ -58,7 +61,7 @@ public class editpost extends AppCompatActivity {
     TextView ldate1,ldate2,ldate3;
     Date d1,d2,d3;
     String format;
-    TextView t1,t2,t3;
+   EditText t1,t2,t3;
     int day1,month1,year1,day2,month2,year2,day3,month3,year3;
     Button setd1,setd2,setd3,sett1,sett2,sett3;
     String d;
@@ -86,28 +89,25 @@ public class editpost extends AppCompatActivity {
         // actionBar.setDisplayHomeAsUpEnabled(true);
         subtitle=(EditText)findViewById(R.id.sub2edit);
         description=(EditText)findViewById(R.id.desc1edit);
-        date1=(TextView)findViewById(R.id.edate1edit);
-        date2=(TextView)findViewById(R.id.edate2edit);
-        date3=(TextView)findViewById(R.id.edate3edit);
+        date1=(EditText)findViewById(R.id.date1eedit);
+        date2=(EditText)findViewById(R.id.date2eedit);
         venue=(EditText)findViewById(R.id.venue1edit);
         imurl=(EditText)findViewById(R.id.imrl1edit);
         m1name=(EditText)findViewById(R.id.m1nedit);
         m1ph =(EditText)findViewById(R.id.m1pedit);
         m2name=(EditText)findViewById(R.id.m2nedit);
         m2ph=(EditText)findViewById(R.id.m2pedit);
-        setd1=(Button)findViewById(R.id.setd1edit);
-        setd2=(Button)findViewById(R.id.setd2edit);
-        setd3=(Button)findViewById(R.id.setd3edit);
-        sett1=(Button)findViewById(R.id.sett1edit);
-        sett2=(Button)findViewById(R.id.sett2edit);
-        sett3=(Button)findViewById(R.id.sett3edit);
-        t1=(TextView)findViewById(R.id.etime1edit);
-        t2=(TextView)findViewById(R.id.etime2edit);
-        t3=(TextView)findViewById(R.id.etime3edit);
+
+        t1=(EditText)findViewById(R.id.time1eedit);
+        t2=(EditText)findViewById(R.id.time2eedit);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbaredit);
+        toolbar.setTitle("LitClub");
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
        // pl=(LinearLayout)findViewById(R.id.parent);
         mycurrentdate = Calendar.getInstance();
-        set=(Spinner)findViewById(R.id.type_spinner);
-        set.setSelection(2);
         mycurrenttime = Calendar.getInstance();
         day = mycurrentdate.get(Calendar.DAY_OF_MONTH);
         month = mycurrentdate.get(Calendar.MONTH);
@@ -117,11 +117,10 @@ public class editpost extends AppCompatActivity {
         min = mycurrenttime.get(Calendar.MINUTE);
         ldate1=(TextView)findViewById(R.id.date1edit);
         ldate2=(TextView)findViewById(R.id.date2edit);
-        ldate3=(TextView)findViewById(R.id.date3edit);
          i=getIntent();
 id=i.getIntExtra("id",0);
         AsyncHttpClient client=new AsyncHttpClient();
-        client.get("https://dev.rajkumaar.co.in/clement/zara/api/posts.php",new JsonHttpResponseHandler(){
+        client.get(getString(R.string.domain)+getString(R.string.posts),new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {Log.e("Calendar"," "+id);
@@ -133,9 +132,8 @@ id=i.getIntExtra("id",0);
                         {
                             description.setText(obj.getString("description"));
                             // time.setText(obj.getString("timing"));
-                            ds1=obj.getString("date1");
-                            ds2=obj.getString("date2");
-                            ds3=obj.getString("date3");
+                            ds1=obj.getString("startdate");
+                            ds2=obj.getString("enddate");
                             venue.setText(obj.getString("venue"));
                             title.setText(obj.getString("title"));
                             subtitle.setText(obj.getString("subtitle"));
@@ -144,47 +142,12 @@ id=i.getIntExtra("id",0);
                             m1ph.setText(obj.getString("manager1_contact"));
                             m2ph.setText(obj.getString("manager2_contact"));
                             imurl.setText(obj.getString("img_url"));
-                            if(ds1.equals("null")&&ds2.equals("null"))
-                               {   String[] parts = ds3.split(" ");
-                                   date1.setText(parts[0]);
-                                   t1.setText(parts[1]);
-                                   date2.setVisibility(View.GONE);
-                                   setd2.setVisibility(View.GONE);
-                                   sett2.setVisibility(View.GONE);
-                                   t2.setVisibility(View.GONE);
-                                   ldate2.setVisibility(View.GONE);
-                                   date3.setVisibility(View.GONE);
-                                   setd3.setVisibility(View.GONE);
-                                   sett3.setVisibility(View.GONE);
-                                   t3.setVisibility(View.GONE);
-                                   ldate3.setVisibility(View.GONE);
-                                            days="1";
-                                  }else{
-                                        if(ds1.equals("null"))
-                                      {     String[] parts2 = ds2.split(" ");
-                                                 date1.setText(parts2[0]);
-                                                 t1.setText(parts2[1]);
-                                                 String[] parts = ds3.split(" ");
-                                                date2.setText(parts[0]);
-                                                 t2.setText(parts[1]);
-                                          date3.setVisibility(View.GONE);
-                                          setd3.setVisibility(View.GONE);
-                                          sett3.setVisibility(View.GONE);
-                                          t3.setVisibility(View.GONE);
-                                          ldate3.setVisibility(View.GONE);
-                                                 days="2";
-                                          }
-                                           else{String[] parts = ds1.split(" ");
-                                               String[] parts1 = ds2.split(" ");
-                                               String[] parts2= ds3.split(" ");
-                                                date1.setText(parts[0]);
-                                                t1.setText(parts[1]);date2.setText(parts1[0]);
-                                                t2.setText(parts1[1]);
-                                                date3.setText(parts2[0]);
-                                                t3.setText(parts2[1]);
-                                                days="3";
-                                                }
-                                      }
+                            String[] parts = ds1.split(" ");
+                            String[] parts1 = ds2.split(" ");
+
+                            date1.setText(parts[0]);
+                            t1.setText(parts[1]);date2.setText(parts1[0]);
+                            t2.setText(parts1[1]);
 
 
                             break;
@@ -211,7 +174,7 @@ id=i.getIntExtra("id",0);
         // days=set.getSelectedItem().toString();
 
 
-        setd1.setOnClickListener(new View.OnClickListener() {
+        date1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(editpost.this, new DatePickerDialog.OnDateSetListener() {
@@ -241,8 +204,7 @@ id=i.getIntExtra("id",0);
                                 d=year1 + "-0" + monthyear + "-0" + dayofmonth;
                             }
                         }
-                        Calendar calendar1=new GregorianCalendar(year1,month1-1,day1);
-                        timestamp1= TimeUnit.MILLISECONDS.toSeconds(calendar1.getTimeInMillis());
+
                     }
                 }, year, month- 1, day);
                 datePickerDialog.show();
@@ -256,7 +218,7 @@ id=i.getIntExtra("id",0);
                 timePickerDialog.show();*/
             }
         });
-        setd2.setOnClickListener(new View.OnClickListener() {
+        date2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(editpost.this, new DatePickerDialog.OnDateSetListener() {
@@ -285,8 +247,7 @@ id=i.getIntExtra("id",0);
                                 d=year2 + "-0" + monthyear + "-0" + dayofmonth;
                             }
                         }
-                        Calendar calendar2=new GregorianCalendar(year2,month2-1,day2);
-                        timestamp2= TimeUnit.MILLISECONDS.toSeconds(calendar2.getTimeInMillis());
+
                     }
                 }, year, month - 1, day);
                 datePickerDialog.show();
@@ -300,54 +261,10 @@ id=i.getIntExtra("id",0);
                 timePickerDialog.show();*/
             }
         });
-        setd3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(editpost.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int monthyear, int dayofmonth) {
-                        monthyear = monthyear + 1;
-                        day3=dayofmonth;
-                        month3=monthyear;
-                        year3=year;
-                        if (dayofmonth < 10 && monthyear < 10)
-                        { date3.setText(year + "-0" + monthyear + "-0" + dayofmonth);
-                            d=year3 + "-0" + monthyear + "-0" + dayofmonth;}
-                        else {
-                            if (dayofmonth < 10)
-                            {date3.setText(year + "-" + monthyear + "-0" + dayofmonth);
-                                d=year3 + "-0" + monthyear + "-0" + dayofmonth;}
-                            else {
-                                date3.setText(year + "-" + monthyear + "-" + dayofmonth);
-                                d=year3 + "-0" + monthyear + "-0" + dayofmonth;
-                            }
-                            if (monthyear < 10)
-                            { date3.setText(year + "-0" + monthyear + "-" + dayofmonth);
-                                d=year3 + "-0" + monthyear + "-0" + dayofmonth;}
-                            else {
-                                date3.setText(year + "-" + monthyear + "-" + dayofmonth);
-                                d=year3 + "-0" + monthyear + "-0" + dayofmonth;
-                            }
-                        }
-                        Calendar calendar3=new GregorianCalendar(year3,month3-1,day3);
-                        timestamp3= TimeUnit.MILLISECONDS.toSeconds(calendar3.getTimeInMillis());
 
-                    }
-                }, year, month - 1, day);
-                datePickerDialog.show();
-              /*  TimePickerDialog timePickerDialog = new TimePickerDialog(organise.this, new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker timePicker, int hr, int min) {
-                        selectedtimeformat(hr);
-                        d+= " "+hr + " : " + min + " "+ format;
-                    }
-                }, hr, min, true);
-                timePickerDialog.show();*/
-            }
-        });
         // date1.setText(d);
 
-        sett1.setOnClickListener(new View.OnClickListener() {
+        t1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(editpost.this, new TimePickerDialog.OnTimeSetListener() {
@@ -364,7 +281,7 @@ id=i.getIntExtra("id",0);
             }
         });
 
-        sett2.setOnClickListener(new View.OnClickListener() {
+        t2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(editpost.this, new TimePickerDialog.OnTimeSetListener() {
@@ -381,24 +298,7 @@ id=i.getIntExtra("id",0);
             }
         });
 
-        sett3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                TimePickerDialog timePickerDialog = new TimePickerDialog(editpost.this, new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker timePicker, int hr, int min) {
-                        selectedtimeformat(hr);
-                        if(min<10)
-                            t3.setText(hr + " : 0" + min + " " + format);
-                        else
-                            t3.setText(hr + " : " + min + " " + format);
-                    }
-                }, hr, min, true);
-                timePickerDialog.show();
-            }
-        });
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        //  d1=sdf.parse(date1.getText().toString());
+
         //Timestamp ts=new Timestamp(d1);
        /* Calendar calendar1=new GregorianCalendar(year1,month1,day1);
         timestamp1= TimeUnit.MILLISECONDS.toSeconds(calendar1.getTimeInMillis());
@@ -427,29 +327,16 @@ id=i.getIntExtra("id",0);
         params.put("m1_contact", m1ph.getText().toString());
         params.put("m2_name", m2name.getText().toString());
         params.put("m2_contact", m2ph.getText().toString());
-        if (days.equals("1")) {
-            params.put("date3", date1.getText().toString() + " " + t1.getText().toString());
-            params.put("enddate", timestamp1);
+        params.put("startdate", date1.getText().toString() + " " + t1.getText().toString());
+        params.put("enddate", date2.getText().toString() + " " + t2.getText().toString());
 
-        } else {
-            if (days.equals("2")) {
-                params.put("date2", date1.getText().toString() + " " + t1.getText().toString());
-                params.put("date3", date2.getText().toString() + " " + t2.getText().toString());
-                params.put("enddate", timestamp2);
-            } else {
-                params.put("date1", date1.getText().toString() + " " + t1.getText().toString());
-                params.put("date2", date2.getText().toString() + " " + t2.getText().toString());
-                params.put("date3", date3.getText().toString() + " " + t3.getText().toString());
-                params.put("enddate", timestamp3);
-            }
-        }
 
 
         gdata g = new gdata();
         //String s=g.getToken();
         s = g.getToken();
         client.addHeader("Authorization", "Bearer " + s);
-        client.post("https://dev.rajkumaar.co.in/clement/zara/api/edit.php", params, new JsonHttpResponseHandler() {
+        client.post(getString(R.string.domain)+getString(R.string.editpost), params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Toast.makeText(editpost.this, "s" + timestamp3, Toast.LENGTH_SHORT).show();
@@ -466,6 +353,20 @@ id=i.getIntExtra("id",0);
             }
         });
 
+    }
+    public static boolean isValid(String url)
+    {
+        /* Try creating a valid URL */
+        try {
+            new URL(url).toURI();
+            return true;
+        }
+
+        // If there was an Exception
+        // while creating URL object
+        catch (Exception e) {
+            return false;
+        }
     }
     public void orga(View v) {
         flag=1;
@@ -494,71 +395,31 @@ id=i.getIntExtra("id",0);
         {flag=0;
             venue.setError("Field cannot be left blank.");
         }
-        if(days.equals("1")) {
-            if(date1.getText().length()==0)
-            {flag=0;
-                date1.setError("Field cannot be left blank.set value");
-            }
-            if(t1.getText().length()==0)
-            {flag=0;
-                t1.setError("Field cannot be left blank.set value");
-
-            }
+        if(!isValid(imurl.getText().toString()))
+        { flag=0;
+            imurl.setError("Invalid url");
+        }
+        if(date1.getText().length()==0)
+        {flag=0;
+            date1.setError("Field cannot be left blank.set value");
+        }
+        if(t1.getText().length()==0)
+        {flag=0;
+            t1.setError("Field cannot be left blank.set value");
 
         }
-        else{
-            if(days.equals("2"))
-            {
-                if(date1.getText().length()==0)
-                {flag=0;
-                    date1.setError("Field cannot be left blank.set value");
-                }
-                if(t1.getText().length()==0)
-                {flag=0;
-                    t1.setError("Field cannot be left blank.set value");
-
-                }
-                if(date2.getText().length()==0)
-                {flag=0;
-                    date2.setError("Field cannot be left blank.set value");
-                }
-                if(t2.getText().length()==0)
-                {flag=0;
-                    t2.setError("Field cannot be left blank.set value");
-
-                }
-
-            }
-            else{
-                if(date1.getText().length()==0)
-                {flag=0;
-                    date1.setError("Field cannot be left blank.set value");
-                }
-                if(t1.getText().length()==0)
-                {flag=0;
-                    t1.setError("Field cannot be left blank.set value");
-
-                }
-                if(date2.getText().length()==0)
-                {flag=0;
-                    date2.setError("Field cannot be left blank.set value");
-                }
-                if(t2.getText().length()==0)
-                {flag=0;
-                    t2.setError("Field cannot be left blank.set value");
-
-                }
-                if(date3.getText().length()==0)
-                {flag=0;
-                    date3.setError("Field cannot be left blank.set value");
-                }
-                if(t3.getText().length()==0)
-                {flag=0;
-                    t3.setError("Field cannot be left blank.set value");
-
-                }
-            }
+        if(date2.getText().length()==0)
+        {flag=0;
+            date2.setError("Field cannot be left blank.set value");
         }
+        if(t2.getText().length()==0)
+        {flag=0;
+            t2.setError("Field cannot be left blank.set value");
+
+        }
+
+
+
         if (flag ==1) {
            org1();
         }
@@ -589,63 +450,7 @@ id=i.getIntExtra("id",0);
             }
         }
     }
-    public void dismiss(View v)
-    {
-        days=set.getSelectedItem().toString();
 
-       // dial.dismiss();
-        Toast.makeText(editpost.this,days, Toast.LENGTH_SHORT).show();
-        onAdd();
-    }
-    public void onAdd() {
-        if(days.equals("1"))
-        {
-            date3.setVisibility(View.GONE);
-            date2.setVisibility(View.GONE);
-            setd2.setVisibility(View.GONE);
-            setd3.setVisibility(View.GONE);
-            sett2.setVisibility(View.GONE);
-            sett3.setVisibility(View.GONE);
-            t2.setVisibility(View.GONE);
-            t3.setVisibility(View.GONE);
-            ldate3.setVisibility(View.GONE);
-            ldate2.setVisibility(View.GONE);
-        }
-        else{if(days.equals("2"))
-        {
-            date3.setVisibility(View.GONE);
-            setd3.setVisibility(View.GONE);
-            sett3.setVisibility(View.GONE);
-            t3.setVisibility(View.GONE);
-            ldate3.setVisibility(View.GONE);
-            date2.setVisibility(View.VISIBLE);
-            setd2.setVisibility(View.VISIBLE);
-            sett2.setVisibility(View.VISIBLE);
-            t2.setVisibility(View.VISIBLE);
-            ldate2.setVisibility(View.VISIBLE);
-        }else{
-
-            date1.setVisibility(View.VISIBLE);
-            setd1.setVisibility(View.VISIBLE);
-            sett1.setVisibility(View.VISIBLE);
-            t1.setVisibility(View.VISIBLE);
-            ldate1.setVisibility(View.VISIBLE);
-
-            date2.setVisibility(View.VISIBLE);
-            setd2.setVisibility(View.VISIBLE);
-            sett2.setVisibility(View.VISIBLE);
-            t2.setVisibility(View.VISIBLE);
-            ldate2.setVisibility(View.VISIBLE);
-
-            date3.setVisibility(View.VISIBLE);
-            setd3.setVisibility(View.VISIBLE);
-            sett3.setVisibility(View.VISIBLE);
-            t3.setVisibility(View.VISIBLE);
-            ldate3.setVisibility(View.VISIBLE);
-        }
-
-        }
-    }
 
 
 }

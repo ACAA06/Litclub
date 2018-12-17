@@ -154,6 +154,7 @@ public class myfirebase extends FirebaseMessagingService {
 
         }catch (Exception e){
 
+            img_url=null;
             e.printStackTrace();
 
         }
@@ -173,39 +174,42 @@ public class myfirebase extends FirebaseMessagingService {
                     public void run() {
 
                         AsyncHttpClient client = new AsyncHttpClient();
+                        try {
+                            client.get(img_url, null, new AsyncHttpResponseHandler() {
 
-                        client.get(img_url, null, new AsyncHttpResponseHandler() {
+                                @Override
 
-                            @Override
-
-                            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
-
-
-                            }
+                                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
 
 
-
-                            @Override
-
-                            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
-                                myBitmap = BitmapFactory.decodeByteArray(responseBody, 0, responseBody.length);
-
-                            }
+                                }
 
 
+                                @Override
 
-                            @Override
+                                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
-                            public void onFinish() {
+                                    myBitmap = BitmapFactory.decodeByteArray(responseBody, 0, responseBody.length);
 
-                                createNotification();
+                                }
 
-                            }
 
-                        });
+                                @Override
 
+                                public void onFinish() {
+
+                                    createNotification();
+
+                                }
+
+                            });
+                        }
+                        catch(Exception e)
+                        {
+                            e.printStackTrace();
+
+                            createNotification();
+                        }
                     }
 
                 };
@@ -250,7 +254,7 @@ public class myfirebase extends FirebaseMessagingService {
 
         Log.d(TAG, "test Refreshed ID: " + FirebaseInstanceId.getInstance().getId());
 
-        Log.d(TAG, " test Refreshed token: " + token);
+        Log.e(TAG, " test Refreshed token: " + token);
 
 
 

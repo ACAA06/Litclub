@@ -1,6 +1,7 @@
 package clemadr06.litclub;
 
 import android.app.ActionBar;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,18 +25,19 @@ public class login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
+        //setContentView(R.layout.activity_login);
+        Dialog dialog = new Dialog(login.this);
+        dialog.setContentView(R.layout.activity_login);
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Login");
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+       // toolbar.setTitle("Login");
+        /*toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
-        });
+        });*/
 
-
+        dialog.show();
 
         uname=(EditText) findViewById(R.id.uname);
         pass=(EditText) findViewById(R.id.pass);

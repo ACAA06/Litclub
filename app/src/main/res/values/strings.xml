@@ -7,6 +7,12 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">acaa</string>
     <string name="default_notification_channel_id">Alerts</string>
+    <string name="posts">/api/events</string>
+    <string name="settoken">/api/settoken</string>
+    <string name="signin">/api/login</string>
+    <string name="editpost">/api/edit.php</string>
+    <string name="delete">/api/delete.php</string>
+    <string name="domain">https://dev.rajkumaar.co.in/zara</string>
 
     <string-array name="types">
         <item>1</item>

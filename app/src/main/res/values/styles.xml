@@ -9,6 +9,9 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
     </style>
+    <style name="unlock" parent="Theme.AppCompat.Light.DarkActionBar">
+        @import url(https://fonts.googleapis.com/css?family=Unlock);
+    </style>
     <style name="myDialogTheme" parent="@android:style/Theme.Dialog">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFrame">@null</item>

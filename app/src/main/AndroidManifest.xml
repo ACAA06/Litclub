@@ -26,6 +26,7 @@
         <activity
             android:name="clemadr06.litclub.MainActivity"
             android:label="@string/app_name"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,11 +43,13 @@
             android:name="clemadr06.litclub.organise"
             android:label="Organise"
             android:launchMode="singleTask"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:parentActivityName="clemadr06.litclub.adminpanel"/>
         <activity
             android:name="clemadr06.litclub.description"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:parentActivityName="clemadr06.litclub.MainActivity"/>
         <activity
             android:name="clemadr06.litclub.imgonclick"
             android:theme="@style/myDialogTheme" />
