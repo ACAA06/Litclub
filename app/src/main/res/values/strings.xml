@@ -10,8 +10,8 @@
     <string name="posts">/api/events</string>
     <string name="settoken">/api/settoken</string>
     <string name="signin">/api/login</string>
-    <string name="editpost">/api/edit.php</string>
-    <string name="delete">/api/delete.php</string>
+    <string name="editpost">/api/edit</string>
+    <string name="delete">/api/delete</string>
     <string name="domain">https://dev.rajkumaar.co.in/zara</string>
 
     <string-array name="types">

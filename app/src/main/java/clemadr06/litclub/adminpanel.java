@@ -183,7 +183,7 @@ retry.setVisibility(View.VISIBLE);
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
-                    if (response.getString("data").equals(" ")) {
+                    if (response.getJSONArray("data").length()<1) {
                         p1.setVisibility(View.GONE);
                       //  Toast.makeText(adminpanel.this,"no posts added",Toast.LENGTH_SHORT).show();;
                         internet.setVisibility(View.VISIBLE);
@@ -191,7 +191,6 @@ retry.setVisibility(View.VISIBLE);
                         retry.setVisibility(View.GONE);
                         error.setText("NO POSTS YET");
                     } else {
-
                         JSONArray jsonArray = response.getJSONArray("data");
                         id = new int[jsonArray.length()];
                         for (int i = 0; i < jsonArray.length(); i++) {
@@ -204,8 +203,6 @@ retry.setVisibility(View.VISIBLE);
                         clubsadapter = new ClubAdapter(adminpanel.this, clubList);
                         p1.setVisibility(View.GONE);
                         listView.setAdapter(clubsadapter);
-
-
                     }
                 }
                 catch(Exception e)
@@ -253,13 +250,21 @@ retry.setVisibility(View.VISIBLE);
                                 {
                                     @Override
                                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                                        Toast.makeText(adminpanel.this,"deleted",Toast.LENGTH_SHORT).show();
-                                        super.onSuccess(statusCode, headers, response);
+                                        try {
+                                            Toast.makeText(adminpanel.this,response.getString("message"),Toast.LENGTH_SHORT).show();
+                                            super.onSuccess(statusCode, headers, response);
+                                        }
+                                        catch(Exception e)
+                                        {
+                                            e.printStackTrace();
+                                        }
+
                                     }
                                     @Override
                                     public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
                                         // called when response HTTP status is "4XX" (eg. 401, 403, 404)
-                                        Toast.makeText(adminpanel.this,"failure " , Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(adminpanel.this,res,Toast.LENGTH_SHORT).show();
+
                                     }
                                 });
                                 // finish();

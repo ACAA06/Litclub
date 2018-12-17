@@ -27,6 +27,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.squareup.picasso.Picasso;
@@ -146,8 +147,9 @@ id=i.getIntExtra("id",0);
                             String[] parts1 = ds2.split(" ");
 
                             date1.setText(parts[0]);
-                            t1.setText(parts[1]);date2.setText(parts1[0]);
-                            t2.setText(parts1[1]);
+                           // t1.setText(parts[1]);
+                            date2.setText(parts1[0]);
+                            //t2.setText(parts1[1]);
 
 
                             break;
@@ -336,10 +338,10 @@ id=i.getIntExtra("id",0);
         //String s=g.getToken();
         s = g.getToken();
         client.addHeader("Authorization", "Bearer " + s);
-        client.post(getString(R.string.domain)+getString(R.string.editpost), params, new JsonHttpResponseHandler() {
+        client.post(getString(R.string.domain) + getString(R.string.editpost), params, new AsyncHttpResponseHandler() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                Toast.makeText(editpost.this, "s" + timestamp3, Toast.LENGTH_SHORT).show();
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                Toast.makeText(editpost.this, new String(responseBody), Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(getApplicationContext(),description1.class);
                 i.putExtra("id",id);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -347,9 +349,10 @@ id=i.getIntExtra("id",0);
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
-                // called when response HTTP status is "4XX" (eg. 401, 403, 404)
-                Toast.makeText(editpost.this, "failure " + s + " " + days, Toast.LENGTH_SHORT).show();
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Toast.makeText(editpost.this, new String(responseBody), Toast.LENGTH_SHORT).show();
+                Log.e("Response",new String(responseBody));
+
             }
         });
 

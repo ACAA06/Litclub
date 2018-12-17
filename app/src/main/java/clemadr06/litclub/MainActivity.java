@@ -140,6 +140,28 @@ internet.setVisibility(View.GONE);
         }
         listView.setAdapter(cardArrayAdapter);*/
     }
+
+    @Override
+    protected void onPostResume() {
+if(clubsadapter!=null)
+    clubsadapter.clear();
+if(check()) {
+            internet.setVisibility(View.GONE);
+            gettitle();
+
+        }
+        else{
+            clubsadapter = new clubsadapter(MainActivity.this,clubList1);
+            listView.setAdapter(clubsadapter);
+            internet.setVisibility(View.VISIBLE);
+            error.setText("No internet connections found. Check your connection or try again");
+            whoop.setVisibility(View.VISIBLE);
+            retry.setVisibility(View.VISIBLE);
+            p.setVisibility(View.GONE);
+        }
+        super.onPostResume();
+    }
+
     public void retry(View view){
         if(check())
         { p.setVisibility(View.VISIBLE);
@@ -222,7 +244,7 @@ public void gettitle()
     client.get(getString(R.string.domain)+getString(R.string.posts),new JsonHttpResponseHandler(){
         @Override
         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-            try {if (response.getString("data").equals("Empty")) {
+            try {if (response.getJSONArray("data").length()<1) {
                 p.setVisibility(View.GONE);
                  //Toast.makeText(MainActivity.this,"no posts added",Toast.LENGTH_SHORT).show();
 internet.setVisibility(View.VISIBLE);

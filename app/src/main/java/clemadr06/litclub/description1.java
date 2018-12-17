@@ -131,25 +131,10 @@ get();
                             // time.setText(obj.getString("timing"));
                             venue1.setText(obj.getString("venue"));
                             title1.setText(obj.getString("title"));
-                            d1 = obj.getString("date1");
-                            d2 = obj.getString("date2");
-                            d3 = obj.getString("date3");
-                            if (d1.equals("null") && d2.equals("null")) {
-                                date1.setText(d3);
-                                date2.setVisibility(View.GONE);
-                                date3.setVisibility(View.GONE);
-                            } else {
-                                if (d1.equals(null)) {
-                                    date1.setText(d2);
-                                    date2.setText(d3);
-                                    date3.setVisibility(View.GONE);
-                                } else {
-                                    date1.setText(obj.getString("date1"));
-                                    date2.setText(obj.getString("date2"));
-                                    date3.setText(obj.getString("date3"));
-
-                                }
-                            }
+                            d1 = obj.getString("startdate");
+                            d2 = obj.getString("enddate");
+                            date1.setText(d1);
+                            date2.setText(d2);
                             subtitle1.setText(obj.getString("subtitle"));
                             m1n1.setText(obj.getString("manager1_name"));
                             m2n1.setText(obj.getString("manager2_name"));

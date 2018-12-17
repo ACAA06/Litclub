@@ -133,8 +133,15 @@ else{
                                     client1.get(getContext().getResources().getString(R.string.domain)+getContext().getResources().getString(R.string.delete)+"?id=" + current.getId(), new JsonHttpResponseHandler() {
                                         @Override
                                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                                            Toast.makeText(getContext(), "deleted", Toast.LENGTH_SHORT).show();
-                                            super.onSuccess(statusCode, headers, response);
+                                            try {
+                                                Toast.makeText(getContext(),response.getString("message"),Toast.LENGTH_SHORT).show();
+                                                super.onSuccess(statusCode, headers, response);
+                                            }
+                                            catch(Exception e)
+                                            {
+                                                e.printStackTrace();
+                                            }
+
                                         }
 
                                         @Override
